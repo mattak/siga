@@ -19,10 +19,12 @@ var (
 `,
 		Run: runCommandGoldenCross,
 	}
-	RetryLimit = 10
+	isFillOverflow = false
+	RetryLimit     = 10
 )
 
 func init() {
+	GoldenCrossCmd.PersistentFlags().BoolVarP(&isFillOverflow, "fill", "f", false, "fill data if data length is less than calculate points")
 }
 
 func runCommandGoldenCross(cmd *cobra.Command, args []string) {
@@ -36,20 +38,28 @@ func runCommandGoldenCross(cmd *cobra.Command, args []string) {
 	targetLinePoints := ParseInt(args[2])
 
 	if baseLinePoints <= 0 {
-		log.Fatal("BASE_LINE should be more than 1")
+		log.Fatalf("BASE_LINE should be more than 1: %d\n", baseLinePoints)
 	}
 	if targetLinePoints <= 0 {
-		log.Fatal("TARGET_LINE should be more than 1")
+		log.Fatalf("TARGET_LINE should be more than 1: %d\n", targetLinePoints)
 	}
 
 	// dataframe
 	df := ReadDataFrameByStdinTsv()
 
 	if len(df.Labels)-1 < baseLinePoints {
-		log.Fatal("BASE_LINE should be more than 1")
+		if isFillOverflow {
+			baseLinePoints = len(df.Labels) - 1
+		} else {
+			log.Fatalf("BASE_LINE should be less than data length: %d\n", len(df.Labels)-1)
+		}
 	}
 	if len(df.Labels)-1 < targetLinePoints {
-		log.Fatal("TARGET_LINE should be more than 1")
+		if isFillOverflow {
+			targetLinePoints = len(df.Labels) - 1
+		} else {
+			log.Fatalf("TARGET_LINE should be less than data length: %d\n", len(df.Labels)-1)
+		}
 	}
 
 	// open,close,high,low,volume

@@ -17,5 +17,7 @@ func Execute() error {
 }
 
 func init() {
-	RootCmd.AddCommand(GoldenCrossCmd)
+	RootCmd.AddCommand(IdentityMapCmd)
+	RootCmd.AddCommand(AnomalyDetectionCmd)
+	RootCmd.AddCommand(MeansCmd)
 }

@@ -20,4 +20,7 @@ func init() {
 	RootCmd.AddCommand(IdentityMapCmd)
 	RootCmd.AddCommand(AnomalyDetectionCmd)
 	RootCmd.AddCommand(MeansCmd)
+	RootCmd.AddCommand(SelectCmd)
+	RootCmd.AddCommand(DeviationsCmd)
+	RootCmd.AddCommand(MultiplyCmd)
 }

@@ -42,6 +42,12 @@ func (data Vector) Reverse() {
 	}
 }
 
+func (data Vector) Fill(value float64) {
+	for i := 0; i < len(data); i++ {
+		data[i] = value
+	}
+}
+
 func CreateVector(size int) []float64 {
 	data := make([]float64, size)
 	for i := 0; i < size; i++ {
@@ -70,6 +76,14 @@ func (data Vector) Means(span int) Vector {
 	result := CreateVector(len(data))
 	for i := 0; i < len(result)-span+1; i++ {
 		result[i] = data.Mean(i, span)
+	}
+	return result
+}
+
+func (data Vector) Deviations(span int) Vector {
+	result := CreateVector(len(data))
+	for i := 0; i < len(result)-span+1; i++ {
+		result[i] = data.Deviation(i, span)
 	}
 	return result
 }

@@ -7,32 +7,32 @@ import (
 )
 
 var (
-	MeansCmd = &cobra.Command{
-		Use:     "means [COLUMN_NAME] [SPAN]+",
-		Aliases: []string{"mn"},
+	DeviationsCmd = &cobra.Command{
+		Use:     "deviations [COLUMN_NAME] [SPAN]+",
+		Aliases: []string{"dv"},
 
-		Short: "means vector calculation",
-		Long:  "means vector calculation",
+		Short: "Deviation",
+		Long:  "Deviation",
 		Example: `
-  siga mn volume 20
-  siga mn volume 20 5 1
+deviation by span 5
+  siga dv close 5 < sample.tsv
+deviation by span 5, 10
+  siga dv close 5 10 < sample.tsv
 `,
-		Run: runCommandMeans,
+		Run: runCommandDeviations,
 	}
 )
 
 func init() {
 }
 
-func runCommandMeans(cmd *cobra.Command, args []string) {
+func runCommandDeviations(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
 
-	// args
 	columnName := args[0]
 
-	// dataframe -> vector
 	df := ReadDataFrameByStdinTsv()
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {
@@ -46,9 +46,9 @@ func runCommandMeans(cmd *cobra.Command, args []string) {
 			log.Fatalf("SPAN should be more than 1: %d\n", span)
 		}
 
-		line := vector.Means(span)
+		line := vector.Deviations(span)
 		line.Reverse()
-		err = df.AddColumn(fmt.Sprintf("%s_mean_%d", columnName, span), line)
+		err = df.AddColumn(fmt.Sprintf("%s_deviation_%d", columnName, span), line)
 		if err != nil {
 			log.Fatal(err)
 		}

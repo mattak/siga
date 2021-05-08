@@ -49,7 +49,7 @@ func runCommandGreaterThan(cmd *cobra.Command, args []string) {
 	}
 
 	vector := matrix.GreaterThan()
-	label := fmt.Sprintf("ge_%s_%s", args[0], args[1])
+	label := fmt.Sprintf("gt_%s_%s", args[0], args[1])
 	err := df.AddColumn(label, vector)
 	if err != nil {
 		log.Fatal(err)

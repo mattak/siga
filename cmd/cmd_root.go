@@ -23,4 +23,5 @@ func init() {
 	RootCmd.AddCommand(SelectCmd)
 	RootCmd.AddCommand(DeviationsCmd)
 	RootCmd.AddCommand(MultiplyCmd)
+	RootCmd.AddCommand(ConstCmd)
 }

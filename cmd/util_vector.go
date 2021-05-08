@@ -48,7 +48,7 @@ func (data Vector) Fill(value float64) {
 	}
 }
 
-func CreateVector(size int) []float64 {
+func CreateVector(size int) Vector {
 	data := make([]float64, size)
 	for i := 0; i < size; i++ {
 		data[i] = math.NaN()

@@ -6,6 +6,65 @@ import (
 
 type Vector []float64
 
+func CreateVector(size int) Vector {
+	data := make([]float64, size)
+	for i := 0; i < size; i++ {
+		data[i] = math.NaN()
+	}
+	return data
+}
+
+func (data Vector) Reverse() {
+	j := len(data) - 1
+	for i := 0; i < len(data)/2; i++ {
+		tmp := data[i]
+		data[i] = data[j]
+		data[j] = tmp
+		j--
+	}
+}
+
+func (data Vector) Fill(value float64) {
+	for i := 0; i < len(data); i++ {
+		data[i] = value
+	}
+}
+
+func (data Vector) HasAnyValue(value float64) bool {
+	if math.IsNaN(value) {
+		for i := 0; i < len(data); i++ {
+			if math.IsNaN(data[i]) {
+				return true
+			}
+		}
+	} else {
+		for i := 0; i < len(data); i++ {
+			if data[i] == value {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func (data Vector) IsAllValue(value float64) bool {
+	if math.IsNaN(value) {
+
+		for i := 0; i < len(data); i++ {
+			if !math.IsNaN(data[i]) {
+				return false
+			}
+		}
+	} else {
+		for i := 0; i < len(data); i++ {
+			if data[i] != value {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 func (data Vector) Sum(start, length int) float64 {
 	result := 0.0
 	for i := start; i < start+length; i++ {
@@ -32,30 +91,6 @@ func (data Vector) DeviationSquare(start, length int) float64 {
 
 func (data Vector) Deviation(start, length int) float64 {
 	return math.Sqrt(data.DeviationSquare(start, length))
-}
-
-func (data Vector) Reverse() {
-	j := len(data) - 1
-	for i := 0; i < len(data)/2; i++ {
-		tmp := data[i]
-		data[i] = data[j]
-		data[j] = tmp
-		j--
-	}
-}
-
-func (data Vector) Fill(value float64) {
-	for i := 0; i < len(data); i++ {
-		data[i] = value
-	}
-}
-
-func CreateVector(size int) Vector {
-	data := make([]float64, size)
-	for i := 0; i < size; i++ {
-		data[i] = math.NaN()
-	}
-	return data
 }
 
 func (data Vector) SigmaAnomalies(span int, thresholdSigma float64) Vector {

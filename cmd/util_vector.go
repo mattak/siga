@@ -66,8 +66,6 @@ func (data Vector) SigmaAnomalies(span int, thresholdSigma float64) Vector {
 		diff := data[i] - mean
 		deviationThreshold := deviation * thresholdSigma
 
-		//(thresholdSigma > 0 && diff >= deviationThreshold) ||
-		//(thresholdSigma < 0 && diff <= deviationThreshold)
 		if deviationThreshold != 0 {
 			result[i] = diff / deviationThreshold
 		} else {

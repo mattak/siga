@@ -31,4 +31,5 @@ func init() {
 	RootCmd.AddCommand(GreaterThanCmd)
 	RootCmd.AddCommand(DetectAnyCmd)
 	RootCmd.AddCommand(DetectAllCmd)
+	RootCmd.AddCommand(CountCmd)
 }

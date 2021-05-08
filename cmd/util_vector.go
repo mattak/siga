@@ -1,6 +1,8 @@
 package cmd
 
-import "math"
+import (
+	"math"
+)
 
 type Vector []float64
 
@@ -58,13 +60,16 @@ func CreateVector(size int) Vector {
 
 func (data Vector) SigmaAnomalies(span int, thresholdSigma float64) Vector {
 	result := CreateVector(len(data))
-	for i := 0; i < len(data)-span-1; i++ {
+	for i := 0; i < len(data)-span; i++ {
 		mean := data.Mean(i+1, span)
 		deviation := data.Deviation(i+1, span)
 		diff := data[i] - mean
-		if (thresholdSigma > 0 && diff >= deviation*thresholdSigma) ||
-			(thresholdSigma < 0 && diff <= deviation*thresholdSigma) {
-			result[i] = deviation * thresholdSigma
+		deviationThreshold := deviation * thresholdSigma
+
+		//(thresholdSigma > 0 && diff >= deviationThreshold) ||
+		//(thresholdSigma < 0 && diff <= deviationThreshold)
+		if deviationThreshold != 0 {
+			result[i] = diff / deviationThreshold
 		} else {
 			result[i] = 0
 		}

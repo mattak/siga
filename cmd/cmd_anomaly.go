@@ -1,29 +1,30 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"log"
 )
 
 var (
-	AnomalyDetectionCmd = &cobra.Command{
-		Use:     "anomaly_detection [COLUMN_NAME] [SPAN] [SIGMA_THRESHOLD]",
-		Aliases: []string{"ad"},
+	AnomalyCmd = &cobra.Command{
+		Use:     "anomaly [COLUMN_NAME] [SPAN] [SIGMA_THRESHOLD]",
+		Aliases: []string{"an"},
 
-		Short: "Anomaly detection",
-		Long:  "Anomaly detection",
+		Short: "Anomaly calculation",
+		Long:  "Anomaly calculation",
 		Example: `
-anomaly detection by 1.5 sigma, 10 data points:
+anomaly calculation by 1.5 sigma, 10 data points:
   siga ad volume 10 1.5 < sample.tsv
 `,
-		Run: runCommandAnomalyDetection,
+		Run: runCommandAnomaly,
 	}
 )
 
 func init() {
 }
 
-func runCommandAnomalyDetection(cmd *cobra.Command, args []string) {
+func runCommandAnomaly(cmd *cobra.Command, args []string) {
 	if len(args) < 3 {
 		log.Fatal("COLUMN_NAME, SPAN, THRESHOLD should be declared")
 	}
@@ -41,7 +42,7 @@ func runCommandAnomalyDetection(cmd *cobra.Command, args []string) {
 
 	result := vector.SigmaAnomalies(span, sigmaThreshold)
 	result.Reverse()
-	err = df.AddColumn("anomalies", result)
+	err = df.AddColumn(fmt.Sprintf("%s_anomalies", columnName), result)
 	if err != nil {
 		log.Fatalf("add result column failed\n")
 	}

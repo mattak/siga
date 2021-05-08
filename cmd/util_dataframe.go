@@ -110,6 +110,14 @@ func (df *DataFrame) Reverse() {
 	}
 }
 
+func (df *DataFrame) Take(size int) {
+	if len(df.Labels) <= size {
+		return
+	}
+	df.Labels = df.Labels[0:size]
+	df.Data = df.Data[0:size]
+}
+
 func (df *DataFrame) PrintTsv() {
 	fmt.Println(strings.Join(df.Headers, "\t"))
 	for i := 0; i < len(df.Labels); i++ {

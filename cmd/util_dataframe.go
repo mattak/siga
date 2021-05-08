@@ -12,18 +12,6 @@ type DataFrame struct {
 	Data    [][]float64 `json:"data"`
 }
 
-func (df *DataFrame) Sum(column, from, size int) float64 {
-	sum := 0.0
-	for i := from; i < from+size; i++ {
-		sum += df.Data[i][column]
-	}
-	return sum
-}
-
-func (df *DataFrame) Mean(column, from, size int) float64 {
-	return df.Sum(column, from, size) / float64(size)
-}
-
 func (df *DataFrame) FindHeaderIndex(name string) int {
 	for i, v := range df.Headers {
 		if v == name {
@@ -53,14 +41,6 @@ func (df *DataFrame) ExtractColumn(columnName string) (Vector, error) {
 		data[i] = df.Data[i][columnIndex]
 	}
 	return data, nil
-}
-
-func (df *DataFrame) Clone() *DataFrame {
-	newDf := &DataFrame{}
-	newDf.Headers = df.Headers
-	newDf.Labels = df.Labels
-	newDf.Data = df.Data
-	return newDf
 }
 
 func (df *DataFrame) AddColumn(newHeader string, newDataColumn []float64) error {
@@ -112,6 +92,22 @@ func (df *DataFrame) SelectColumn(selectionHeaders ...string) error {
 	df.Headers = headers
 
 	return nil
+}
+
+func (df *DataFrame) Reverse() {
+	j := len(df.Labels) - 1
+	for i := 0; i < len(df.Labels)/2; i++ {
+		tmpLabel := df.Labels[i]
+		df.Labels[i] = df.Labels[j]
+		df.Labels[j] = tmpLabel
+
+		for column := 0; column < len(df.Headers)-1; column++ {
+			tmpData := df.Data[i][column]
+			df.Data[i][column] = df.Data[j][column]
+			df.Data[j][column] = tmpData
+		}
+		j--
+	}
 }
 
 func (df *DataFrame) PrintTsv() {

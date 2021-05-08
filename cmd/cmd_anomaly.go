@@ -42,7 +42,7 @@ func runCommandAnomaly(cmd *cobra.Command, args []string) {
 
 	result := vector.SigmaAnomalies(span, sigmaThreshold)
 	result.Reverse()
-	err = df.AddColumn(fmt.Sprintf("%s_anomalies", columnName), result)
+	err = df.AddColumn(fmt.Sprintf("%s_anomaly", columnName), result)
 	if err != nil {
 		log.Fatalf("add result column failed\n")
 	}

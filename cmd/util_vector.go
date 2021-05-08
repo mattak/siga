@@ -93,16 +93,15 @@ func (data Vector) Deviation(start, length int) float64 {
 	return math.Sqrt(data.DeviationSquare(start, length))
 }
 
-func (data Vector) SigmaAnomalies(span int, thresholdSigma float64) Vector {
+func (data Vector) SigmaAnomalies(span int) Vector {
 	result := CreateVector(len(data))
 	for i := 0; i < len(data)-span; i++ {
 		mean := data.Mean(i+1, span)
 		deviation := data.Deviation(i+1, span)
 		diff := data[i] - mean
-		deviationThreshold := deviation * thresholdSigma
 
-		if deviationThreshold != 0 {
-			result[i] = diff / deviationThreshold
+		if deviation != 0 {
+			result[i] = diff / deviation
 		} else {
 			result[i] = 0
 		}

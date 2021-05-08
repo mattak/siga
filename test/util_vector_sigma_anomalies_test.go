@@ -10,7 +10,7 @@ func TestVectorSigmaAnomalies(t *testing.T) {
 	t.Run("1 seq", func(t *testing.T) {
 		data := cmd.Vector{1, 2, 3}
 		data.Reverse()
-		result := data.SigmaAnomalies(1, 1)
+		result := data.SigmaAnomalies(1)
 		result.Reverse()
 		if len(result) != 3 {
 			t.Fatal("result length is wrong")
@@ -30,7 +30,7 @@ func TestVectorSigmaAnomalies(t *testing.T) {
 	t.Run("2 seq", func(t *testing.T){
 		data := cmd.Vector{1, 2, 3}
 		data.Reverse()
-		result := data.SigmaAnomalies(2, 1)
+		result := data.SigmaAnomalies(2)
 		result.Reverse()
 		if len(result) != 3 {
 			t.Fatal("result length is wrong")

@@ -11,8 +11,8 @@ var (
 	GreaterEqualCmd = &cobra.Command{
 		Use:     "greater_equal [COLUMN_NAME|NUMBER] [COLUMN_NAME|NUMBER]",
 		Aliases: []string{"ge"},
-		Short: "Greater equal comparation",
-		Long: "Greater equal comparation",
+		Short: "Greater equal comparison",
+		Long: "Greater equal comparison",
 		Example: `
   siga ge column1 100
   siga ge column1 column2

@@ -25,4 +25,5 @@ func init() {
 	RootCmd.AddCommand(MultiplyCmd)
 	RootCmd.AddCommand(ConstCmd)
 	RootCmd.AddCommand(GreaterEqualCmd)
+	RootCmd.AddCommand(GreaterThanCmd)
 }

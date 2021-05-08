@@ -30,3 +30,19 @@ func (data Matrix) GreaterEqual() Vector {
 	}
 	return result
 }
+
+func (data Matrix) GreaterThan() Vector {
+	result := CreateVector(len(data[0]))
+	for i := 0; i < len(data[0]); i++ {
+		v0 := data[0][i]
+		v1 := data[1][i]
+		if math.IsNaN(v0) || math.IsNaN(v1) {
+			result[i] = math.NaN()
+		} else if v0 > v1 {
+			result[i] = 1
+		} else {
+			result[i] = 0
+		}
+	}
+	return result
+}

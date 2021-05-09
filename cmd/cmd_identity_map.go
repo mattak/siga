@@ -29,5 +29,5 @@ func init() {
 
 func runCommandIdentity(cmd *cobra.Command, args []string) {
 	df := ReadDataFrameByStdinTsv()
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

@@ -33,5 +33,5 @@ func runCommandSelect(cmd *cobra.Command, args []string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

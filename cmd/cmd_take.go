@@ -29,5 +29,5 @@ func runCommandTake(cmd *cobra.Command, args []string) {
 	}
 	size := ParseInt(args[0])
 	df.Take(size)
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

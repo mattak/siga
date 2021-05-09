@@ -32,5 +32,5 @@ func runCommandFilterNot(cmd *cobra.Command, args []string) {
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 	indexes := matrix.FilterNotIndex()
 	df.SelectRecords(indexes...)
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

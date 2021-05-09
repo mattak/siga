@@ -22,5 +22,5 @@ func init() {
 func runCommandReverse(cmd *cobra.Command, args []string) {
 	df := ReadDataFrameByStdinTsv()
 	df.Reverse()
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

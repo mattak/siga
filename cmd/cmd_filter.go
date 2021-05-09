@@ -31,5 +31,5 @@ func runCommandFilter(cmd *cobra.Command, args []string) {
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 	indexes := matrix.FilterIndex()
 	df.SelectRecords(indexes...)
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

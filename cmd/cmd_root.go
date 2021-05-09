@@ -10,6 +10,7 @@ var (
 		Short: "Signal Analyzer for sequential data",
 		Long:  "Signal Analyzer for sequential data",
 	}
+	IsPreciseOutput = false
 )
 
 func Execute() error {
@@ -17,6 +18,12 @@ func Execute() error {
 }
 
 func init() {
+	RootCmd.PersistentFlags().BoolVarP(
+		&IsPreciseOutput,
+		"precise", "p",
+		false,
+		"floating number should be print precisely",
+	)
 	RootCmd.AddCommand(IdentityCmd)
 	RootCmd.AddCommand(AnomalyCmd)
 	RootCmd.AddCommand(MeansCmd)

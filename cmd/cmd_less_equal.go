@@ -38,5 +38,5 @@ func runCommandLessEqual(cmd *cobra.Command, args []string) {
 		log.Fatal(err)
 	}
 
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

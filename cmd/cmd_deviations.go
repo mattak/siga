@@ -54,5 +54,5 @@ func runCommandDeviations(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

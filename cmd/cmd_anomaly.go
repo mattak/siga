@@ -46,5 +46,5 @@ func runCommandAnomaly(cmd *cobra.Command, args []string) {
 		log.Fatalf("add result column failed\n")
 	}
 
-	df.PrintTsv()
+	df.PrintTsv(IsPreciseOutput)
 }

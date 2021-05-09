@@ -17,7 +17,7 @@ func Execute() error {
 }
 
 func init() {
-	RootCmd.AddCommand(IdentityMapCmd)
+	RootCmd.AddCommand(IdentityCmd)
 	RootCmd.AddCommand(AnomalyCmd)
 	RootCmd.AddCommand(MeansCmd)
 	RootCmd.AddCommand(DeviationsCmd)

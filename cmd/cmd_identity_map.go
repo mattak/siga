@@ -5,29 +5,29 @@ import (
 )
 
 var (
-	IdentityMapCmd = &cobra.Command{
-		Use:     "identity_map",
-		Aliases: []string{"im"},
+	IdentityCmd = &cobra.Command{
+		Use:     "identity",
+		Aliases: []string{"id"},
 
 		Short: "Identity mapping",
 		Long:  "Identity mapping",
 		Example: `
 mapping from stdin:
-  siga im < sample.tsv
+  siga id < sample.tsv
 
 sample data format:
   date	open	close	high	low	volume
   2020-01-01	100	105	110	90	100
   2020-01-02	100	105	110	90	100
 `,
-		Run: runCommandIdentityMap,
+		Run: runCommandIdentity,
 	}
 )
 
 func init() {
 }
 
-func runCommandIdentityMap(cmd *cobra.Command, args []string) {
+func runCommandIdentity(cmd *cobra.Command, args []string) {
 	df := ReadDataFrameByStdinTsv()
 	df.PrintTsv()
 }

@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"log"
-	"strconv"
 )
 
 var (
@@ -30,23 +29,7 @@ func runCommandGreaterThan(cmd *cobra.Command, args []string) {
 	}
 
 	df := ReadDataFrameByStdinTsv()
-
-	matrix := make(Matrix, len(args))
-	for i := 0; i < 2; i++ {
-		matrix[i] = CreateVector(len(df.Labels))
-
-		vector, err := df.ExtractColumn(args[i])
-		if err == nil {
-			matrix[i] = vector
-		} else {
-			v, err := strconv.ParseFloat(args[i], 64)
-			if err != nil {
-				log.Fatalf("COLUMN_NAME or NUMBER required: %s", args[i])
-			} else {
-				matrix[i].Fill(v)
-			}
-		}
-	}
+	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.GreaterThan()
 	label := fmt.Sprintf("gt_%s_%s", args[0], args[1])

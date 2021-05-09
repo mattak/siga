@@ -6,24 +6,23 @@ import (
 )
 
 var (
-	SelectCmd = &cobra.Command{
-		Use:     "select [COLUMN_NAME]+",
-		Aliases: []string{"sl"},
+	SelectColumnCmd = &cobra.Command{
+		Use:     "select_column [COLUMN_NAME]+",
+		Aliases: []string{"sc"},
 
 		Short: "select column",
 		Long:  "Select column",
 		Example: `
-Select column of open, close, volume:
-  siga sl open close volume < sample.tsv
+  siga sc open close volume < sample.tsv
 `,
-		Run: runCommandSelect,
+		Run: runCommandSelectColumn,
 	}
 )
 
 func init() {
 }
 
-func runCommandSelect(cmd *cobra.Command, args []string) {
+func runCommandSelectColumn(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		log.Fatal("COLUMN_NAME should be declared")
 	}

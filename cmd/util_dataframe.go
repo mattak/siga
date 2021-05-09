@@ -32,6 +32,15 @@ func (df *DataFrame) FindColumnIndex(name string) int {
 	return -1
 }
 
+func (df *DataFrame) FindLabelIndex(name string) int {
+	for i, v := range df.Labels {
+		if v == name {
+			return i
+		}
+	}
+	return -1
+}
+
 func (df *DataFrame) ExtractColumn(columnName string) (Vector, error) {
 	columnIndex := df.FindColumnIndex(columnName)
 	if columnIndex == -1 {

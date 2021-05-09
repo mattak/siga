@@ -24,6 +24,7 @@ func init() {
 		false,
 		"floating number should be print precisely",
 	)
+	RootCmd.AddCommand(VersionCmd)
 	RootCmd.AddCommand(IdentityCmd)
 	RootCmd.AddCommand(AnomalyCmd)
 	RootCmd.AddCommand(MeansCmd)

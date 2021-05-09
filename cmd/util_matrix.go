@@ -83,14 +83,24 @@ func (data Matrix) Equal() Vector {
 	result := CreateVector(len(data[0]))
 	for i := 0; i < len(data[0]); i++ {
 		v0 := data[0][i]
-		v1 := data[1][i]
-		if math.IsNaN(v0) && math.IsNaN(v1) {
-			result[i] = 1
-		} else if v0 == v1 {
-			result[i] = 1
+		isAllSame := true
+
+		if math.IsNaN(v0) {
+			for j := 1; j < len(data); j++ {
+				if !math.IsNaN(data[j][i]) {
+					isAllSame = false
+					break
+				}
+			}
 		} else {
-			result[i] = 0
+			for j := 1; j < len(data); j++ {
+				if v0 != data[j][i] {
+					isAllSame = false
+					break
+				}
+			}
 		}
+		result[i] = BoolToFloat64(isAllSame)
 	}
 	return result
 }

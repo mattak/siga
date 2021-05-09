@@ -3,6 +3,8 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"log"
+	"strconv"
 	"strings"
 )
 
@@ -92,6 +94,37 @@ func (df *DataFrame) SelectColumn(selectionHeaders ...string) error {
 	df.Headers = headers
 
 	return nil
+}
+
+func (df *DataFrame) SelectRecords(indexes ...int) {
+	labels := make([]string, len(indexes))
+	data := make([][]float64, len(indexes))
+	for i := 0; i < len(indexes); i++ {
+		labels[i] = df.Labels[indexes[i]]
+		data[i] = df.Data[indexes[i]]
+	}
+	df.Labels = labels
+	df.Data = data
+}
+
+func (df *DataFrame) ExtractMatrixByColumnNameOrValue(args []string) Matrix {
+	matrix := make(Matrix, len(args))
+	for i := 0; i < len(args); i++ {
+		matrix[i] = CreateVector(len(df.Labels))
+
+		vector, err := df.ExtractColumn(args[i])
+		if err == nil {
+			matrix[i] = vector
+		} else {
+			v, err := strconv.ParseFloat(args[i], 64)
+			if err != nil {
+				log.Fatalf("COLUMN_NAME or NUMBER required: %s", args[i])
+			} else {
+				matrix[i].Fill(v)
+			}
+		}
+	}
+	return matrix
 }
 
 func (df *DataFrame) Reverse() {

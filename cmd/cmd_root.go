@@ -7,8 +7,8 @@ import (
 var (
 	RootCmd = &cobra.Command{
 		Use:   "siga",
-		Short: "Signal analyzer for sequential data",
-		Long:  "Signal analyzer for sequential data",
+		Short: "Signal Analyzer for sequential data",
+		Long:  "Signal Analyzer for sequential data",
 	}
 )
 
@@ -27,6 +27,8 @@ func init() {
 	RootCmd.AddCommand(TakeCmd)
 	RootCmd.AddCommand(ConstCmd)
 	RootCmd.AddCommand(EqualCmd)
+	RootCmd.AddCommand(FilterCmd)
+	RootCmd.AddCommand(FilterNotCmd)
 	RootCmd.AddCommand(GreaterEqualCmd)
 	RootCmd.AddCommand(GreaterThanCmd)
 	RootCmd.AddCommand(DetectAnyCmd)

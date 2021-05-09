@@ -62,3 +62,23 @@ func (data Matrix) Equal() Vector {
 	}
 	return result
 }
+
+func (data Matrix) FilterIndex() []int {
+	indexes := []int{}
+	for i := 0; i < len(data[0]); i++ {
+		if math.IsNaN(data[0][i]) && math.IsNaN(data[1][i]) || data[0][i] == data[1][i] {
+			indexes = append(indexes, i)
+		}
+	}
+	return indexes
+}
+
+func (data Matrix) FilterNotIndex() []int {
+	indexes := []int{}
+	for i := 0; i < len(data[0]); i++ {
+		if !(math.IsNaN(data[0][i]) && math.IsNaN(data[1][i]) || data[0][i] == data[1][i]) {
+			indexes = append(indexes, i)
+		}
+	}
+	return indexes
+}

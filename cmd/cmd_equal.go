@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 	"log"
+	"strings"
 )
 
 var (
@@ -33,7 +34,7 @@ func runCommandEqual(cmd *cobra.Command, args []string) {
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.Equal()
-	label := fmt.Sprintf("eq_%s_%s", args[0], args[1])
+	label := fmt.Sprintf("eq_%s", strings.Join(args, "_"))
 	err := df.AddColumn(label, vector)
 	if err != nil {
 		log.Fatal(err)

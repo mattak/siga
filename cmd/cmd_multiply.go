@@ -16,8 +16,6 @@ var (
 		Example: `
 multiply close and 2
   siga ml close 2 < sample.tsv
-deviation close and open and 3
-  siga dv close open 3 < sample.tsv
 `,
 		Run: runCommandMultiply,
 	}

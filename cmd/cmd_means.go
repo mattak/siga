@@ -48,7 +48,7 @@ func runCommandMeans(cmd *cobra.Command, args []string) {
 
 		line := vector.Means(span)
 		line.Reverse()
-		err = df.AddColumn(fmt.Sprintf("%s_mean_%d", columnName, span), line)
+		err = df.AddColumn(fmt.Sprintf("mean_%s_%d", columnName, span), line)
 		if err != nil {
 			log.Fatal(err)
 		}

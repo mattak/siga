@@ -124,3 +124,30 @@ func (data Vector) Deviations(span int) Vector {
 	}
 	return result
 }
+
+func (data Vector) Shift(offset int) Vector {
+	result := CreateVector(len(data))
+	for i := 0; i < len(data); i++ {
+		p := i - offset
+		if p >= 0 && p < len(data) {
+			result[i] = data[p]
+		} else {
+			result[i] = math.NaN()
+		}
+	}
+	return result
+}
+
+func (data Vector) Invert() Vector {
+	result := CreateVector(len(data))
+	for i := 0; i < len(data); i++ {
+		if data[i] == 0.0 {
+			result[i] = 1.0
+		} else if data[i] == 1.0 {
+			result[i] = 0.0
+		} else {
+			result[i] = data[i]
+		}
+	}
+	return result
+}

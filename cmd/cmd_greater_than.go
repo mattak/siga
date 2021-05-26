@@ -21,6 +21,7 @@ var (
 )
 
 func init() {
+	GreaterThanCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
 func runCommandGreaterThan(cmd *cobra.Command, args []string) {
@@ -32,7 +33,9 @@ func runCommandGreaterThan(cmd *cobra.Command, args []string) {
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.GreaterThan()
-	label := fmt.Sprintf("gt_%s_%s", args[0], args[1])
+	if label == "" {
+		label = fmt.Sprintf("gt_%s_%s", args[0], args[1])
+	}
 	err := df.AddColumn(label, vector)
 	if err != nil {
 		log.Fatal(err)

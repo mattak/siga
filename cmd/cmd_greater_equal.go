@@ -21,6 +21,7 @@ var (
 )
 
 func init() {
+	GreaterEqualCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
 func runCommandGreaterEqual(cmd *cobra.Command, args []string) {
@@ -32,7 +33,10 @@ func runCommandGreaterEqual(cmd *cobra.Command, args []string) {
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.GreaterEqual()
-	label := fmt.Sprintf("ge_%s_%s", args[0], args[1])
+
+	if label == "" {
+		label = fmt.Sprintf("ge_%s_%s", args[0], args[1])
+	}
 	err := df.AddColumn(label, vector)
 	if err != nil {
 		log.Fatal(err)

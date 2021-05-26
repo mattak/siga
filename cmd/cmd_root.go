@@ -11,6 +11,7 @@ var (
 		Long:  "Signal Analyzer for sequential data",
 	}
 	IsPreciseOutput = false
+	label = ""
 )
 
 func Execute() error {
@@ -33,8 +34,10 @@ func init() {
 	RootCmd.AddCommand(SelectColumnCmd)
 	RootCmd.AddCommand(SelectRecordCmd)
 	RootCmd.AddCommand(ReverseCmd)
+	RootCmd.AddCommand(InvertCmd)
 	RootCmd.AddCommand(TakeCmd)
 	RootCmd.AddCommand(ConstCmd)
+	RootCmd.AddCommand(ShiftCmd)
 	RootCmd.AddCommand(FilterCmd)
 	RootCmd.AddCommand(FilterNotCmd)
 	RootCmd.AddCommand(EqualCmd)

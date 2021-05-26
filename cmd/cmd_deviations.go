@@ -48,7 +48,7 @@ func runCommandDeviations(cmd *cobra.Command, args []string) {
 
 		line := vector.Deviations(span)
 		line.Reverse()
-		err = df.AddColumn(fmt.Sprintf("%s_deviation_%d", columnName, span), line)
+		err = df.AddColumn(fmt.Sprintf("deviation_%s_%d", columnName, span), line)
 		if err != nil {
 			log.Fatal(err)
 		}

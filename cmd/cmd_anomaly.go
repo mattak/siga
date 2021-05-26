@@ -22,6 +22,7 @@ anomaly calculation by 10 data points:
 )
 
 func init() {
+	AnomalyCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
 func runCommandAnomaly(cmd *cobra.Command, args []string) {
@@ -41,7 +42,11 @@ func runCommandAnomaly(cmd *cobra.Command, args []string) {
 
 	result := vector.SigmaAnomalies(span)
 	result.Reverse()
-	err = df.AddColumn(fmt.Sprintf("%s_anomaly", columnName), result)
+
+	if label == "" {
+		label = fmt.Sprintf("%s_anomaly", columnName)
+	}
+	err = df.AddColumn(label, result)
 	if err != nil {
 		log.Fatalf("add result column failed\n")
 	}

@@ -22,6 +22,7 @@ add const 1
 )
 
 func init() {
+	ConstCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
 func runCommandConst(cmd *cobra.Command, args []string) {
@@ -34,7 +35,12 @@ func runCommandConst(cmd *cobra.Command, args []string) {
 		n := ParseFloat64(args[i])
 		vector := CreateVector(len(df.Labels))
 		vector.Fill(n)
-		err := df.AddColumn(fmt.Sprintf("const_%.3f", n), vector)
+
+		if label == "" {
+			label = fmt.Sprintf("const_%.3f", n)
+		}
+
+		err := df.AddColumn(label, vector)
 		if err != nil {
 			log.Fatal(err)
 		}

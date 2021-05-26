@@ -9,25 +9,25 @@ import (
 )
 
 var (
-	MultiplyCmd = &cobra.Command{
-		Use:     "multiply [COLUMN_NAME|NUMBER]+",
-		Aliases: []string{"ml", "mul"},
+	DivideCmd = &cobra.Command{
+		Use:     "divide [COLUMN_NAME|NUMBER] [COLUMN_NAME|NUMBER]",
+		Aliases: []string{"div"},
 
-		Short: "Multiply",
-		Long:  "Multiply",
+		Short: "Divide",
+		Long:  "Divide",
 		Example: `
-multiply close and 2
-  siga ml close 2 < sample.tsv
+divide close and 2
+  siga div close 2 < sample.tsv
 `,
-		Run: runCommandMultiply,
+		Run: runCommandDivide,
 	}
 )
 
 func init() {
-	MultiplyCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
+	DivideCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
-func runCommandMultiply(cmd *cobra.Command, args []string) {
+func runCommandDivide(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("More than two COLUMN_NAME or NUMBER should be declared")
 	}
@@ -51,10 +51,10 @@ func runCommandMultiply(cmd *cobra.Command, args []string) {
 		}
 	}
 
-	vector := matrix.InnerProduct()
+	vector := matrix.Divide()
 
 	if label == "" {
-		label = fmt.Sprintf("multiply_%s", strings.Join(args, "_"))
+		label = fmt.Sprintf("divide_%s", strings.Join(args, "_"))
 	}
 
 	err := df.AddColumn(label, vector)

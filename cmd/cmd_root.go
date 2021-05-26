@@ -31,6 +31,7 @@ func init() {
 	RootCmd.AddCommand(MeansCmd)
 	RootCmd.AddCommand(DeviationsCmd)
 	RootCmd.AddCommand(MultiplyCmd)
+	RootCmd.AddCommand(DivideCmd)
 	RootCmd.AddCommand(SelectColumnCmd)
 	RootCmd.AddCommand(SelectRecordCmd)
 	RootCmd.AddCommand(ReverseCmd)

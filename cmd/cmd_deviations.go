@@ -9,7 +9,7 @@ import (
 var (
 	DeviationsCmd = &cobra.Command{
 		Use:     "deviations [COLUMN_NAME] [SPAN]+",
-		Aliases: []string{"dv"},
+		Aliases: []string{"dev", "stdev"},
 
 		Short: "Deviation",
 		Long:  "Deviation",

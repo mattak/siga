@@ -39,37 +39,48 @@ INPUT_DIR=./test/resource/input
 EXPECT_DIR=./test/resource/expect
 
 # lt
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga lt -l expect value 0
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga lt -l expect value 1
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga lt -l expect value 2
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga lt -l expect value 0
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga lt -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga lt -l expect value 2
 
 # le
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga le -l expect value 0
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga le -l expect value 1
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga le -l expect value 2
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga le -l expect value 0
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga le -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga le -l expect value 2
 
 # ge
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga ge -l expect value 0
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga ge -l expect value 1
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga ge -l expect value 2
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga ge -l expect value 0
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga ge -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga ge -l expect value 2
 
 # gt
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga gt -l expect value 0
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga gt -l expect value 1
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga gt -l expect value 2
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga gt -l expect value 0
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga gt -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga gt -l expect value 2
 
 # eq
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga eq -l expect value 0
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_1.tsv siga eq -l expect value 1
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/expect_0.tsv siga eq -l expect value 2
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga eq -l expect value 0
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga eq -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga eq -l expect value 2
 
 # count
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/count_1.tsv siga count
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 
 # identity
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/id_1.tsv siga id
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/id_1.tsv siga id
 
 # rename
-run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/rename_1.tsv siga rc value new_value
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/rename_1.tsv siga rc value new_value
+
+# multiply
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga mul -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga mul -l expect value 0
+run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_0_single_0.tsv siga mul -l expect value 1
+
+# divide
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga div -l expect value 1
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_nan_single_1.tsv siga div -l expect value 0
+run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_0_single_0.tsv siga div -l expect value 1
+run_test $INPUT_DIR/single_nan.tsv $EXPECT_DIR/expect_nan_single_nan.tsv siga div -l expect value 1
 
 teardown

@@ -69,4 +69,7 @@ run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/count_1.tsv siga count
 # identity
 run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/id_1.tsv siga id
 
+# rename
+run_test $INPUT_DIR/single1.tsv $EXPECT_DIR/rename_1.tsv siga rc value new_value
+
 teardown

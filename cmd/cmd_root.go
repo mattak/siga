@@ -48,4 +48,5 @@ func init() {
 	RootCmd.AddCommand(DetectAnyCmd)
 	RootCmd.AddCommand(DetectAllCmd)
 	RootCmd.AddCommand(CountCmd)
+	RootCmd.AddCommand(RenameCmd)
 }

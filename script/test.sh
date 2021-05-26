@@ -92,7 +92,10 @@ run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_1_single_0.tsv siga add -l e
 # sub
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga sub -l expect value 1
 
-# pf
+# profit factor
 run_test $INPUT_DIR/profit_factor_123.tsv $EXPECT_DIR/expect_bare_1.tsv siga pf value
+
+# payoff ratio
+run_test $INPUT_DIR/profit_factor_123.tsv $EXPECT_DIR/expect_bare_1.tsv siga po value
 
 teardown

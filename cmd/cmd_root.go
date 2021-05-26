@@ -54,4 +54,5 @@ func init() {
 	RootCmd.AddCommand(AddCmd)
 	RootCmd.AddCommand(RenameCmd)
 	RootCmd.AddCommand(ProfitFactorCmd)
+	RootCmd.AddCommand(PayoffRatioCmd)
 }

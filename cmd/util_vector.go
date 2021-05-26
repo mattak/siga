@@ -172,6 +172,36 @@ func (data Vector) ProfitFactor() float64 {
 	return positive / -negative
 }
 
+func (data Vector) PayoffRatio() float64 {
+	positive := 0.0
+	negative := 0.0
+	positive_count := 0
+	negative_count := 0
+
+	for i := 0; i < len(data); i++ {
+		if data[i] >= 0 {
+			positive += data[i]
+			positive_count++
+		} else {
+			negative += data[i]
+			negative_count++
+		}
+	}
+
+	if negative_count == 0 || positive_count == 0 {
+		return math.NaN()
+	}
+
+	positive_mean := positive / float64(positive_count)
+	negative_mean := negative / float64(negative_count)
+
+	if negative_mean == 0 {
+		return math.Inf(1)
+	}
+
+	return positive_mean / -negative_mean
+}
+
 func (data Vector) PrintTsv(precise bool) {
 	startFloatFormat := "%.3f"
 	floatFormat := "\t%.3f"

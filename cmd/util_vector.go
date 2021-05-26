@@ -153,6 +153,25 @@ func (data Vector) Invert() Vector {
 	return result
 }
 
+func (data Vector) ProfitFactor() float64 {
+	positive := 0.0
+	negative := 0.0
+
+	for i := 0; i < len(data); i++ {
+		if data[i] >= 0 {
+			positive += data[i]
+		} else {
+			negative += data[i]
+		}
+	}
+
+	if negative == 0 {
+		return math.Inf(1)
+	}
+
+	return positive / -negative
+}
+
 func (data Vector) PrintTsv(precise bool) {
 	startFloatFormat := "%.3f"
 	floatFormat := "\t%.3f"

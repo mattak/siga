@@ -53,4 +53,5 @@ func init() {
 	RootCmd.AddCommand(SubCmd)
 	RootCmd.AddCommand(AddCmd)
 	RootCmd.AddCommand(RenameCmd)
+	RootCmd.AddCommand(ProfitFactorCmd)
 }

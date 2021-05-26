@@ -66,6 +66,9 @@ run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga eq -l ex
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 
+# sum
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sum_123.tsv siga sum value 3
+
 # identity
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/id_1.tsv siga id
 
@@ -82,5 +85,11 @@ run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga div -l e
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_nan_single_1.tsv siga div -l expect value 0
 run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_0_single_0.tsv siga div -l expect value 1
 run_test $INPUT_DIR/single_nan.tsv $EXPECT_DIR/expect_nan_single_nan.tsv siga div -l expect value 1
+
+# add
+run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_1_single_0.tsv siga add -l expect value 1
+
+# sub
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga sub -l expect value 1
 
 teardown

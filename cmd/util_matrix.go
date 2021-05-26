@@ -37,6 +37,44 @@ func (data Matrix) Divide() Vector {
 	return vector
 }
 
+func (data Matrix) Add() Vector {
+	vector := CreateVector(len(data[0]))
+	for i := 0; i < len(data[0]); i++ {
+		vector[i] = data[0][i]
+
+		if math.IsNaN(vector[i]) {
+			continue
+		}
+
+		for j := 1; j < len(data); j++ {
+			if !math.IsNaN(data[j][i]) {
+				vector[i] += data[j][i]
+			}
+		}
+	}
+
+	return vector
+}
+
+func (data Matrix) Subtract() Vector {
+	vector := CreateVector(len(data[0]))
+	for i := 0; i < len(data[0]); i++ {
+		vector[i] = data[0][i]
+
+		if math.IsNaN(vector[i]) {
+			continue
+		}
+
+		for j := 1; j < len(data); j++ {
+			if !math.IsNaN(data[j][i]) {
+				vector[i] -= data[j][i]
+			}
+		}
+	}
+
+	return vector
+}
+
 func (data Matrix) GreaterEqual() Vector {
 	result := CreateVector(len(data[0]))
 	for i := 0; i < len(data[0]); i++ {

@@ -47,9 +47,12 @@ func (data Matrix) Add() Vector {
 		}
 
 		for j := 1; j < len(data); j++ {
-			if !math.IsNaN(data[j][i]) {
-				vector[i] += data[j][i]
+			if math.IsNaN(data[j][i]) {
+				vector[i] = math.NaN()
+				break
 			}
+
+			vector[i] += data[j][i]
 		}
 	}
 
@@ -66,9 +69,12 @@ func (data Matrix) Subtract() Vector {
 		}
 
 		for j := 1; j < len(data); j++ {
-			if !math.IsNaN(data[j][i]) {
-				vector[i] -= data[j][i]
+			if math.IsNaN(data[j][i]) {
+				vector[i] = math.NaN()
+				break
 			}
+
+			vector[i] -= data[j][i]
 		}
 	}
 

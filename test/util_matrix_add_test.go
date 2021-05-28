@@ -22,7 +22,7 @@ func TestMatrixAdd(t *testing.T) {
 	if !math.IsNaN(result[1]) {
 		log.Fatal("result[1] is not expected")
 	}
-	if result[2] != 1 {
+	if !math.IsNaN(result[2]) {
 		log.Fatal("result[2] is not expected")
 	}
 	if result[3] != 1 {

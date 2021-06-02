@@ -101,4 +101,7 @@ run_test $INPUT_DIR/payoff_ratio_111.tsv $EXPECT_DIR/payoff_ratio_111.tsv siga p
 # trading evaluation
 run_test $INPUT_DIR/buy_sell_1.tsv $EXPECT_DIR/buy_sell_1.tsv siga te buy sell
 
+# dollar cost average
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/dollar_cost_average_123.tsv siga dca value
+
 teardown

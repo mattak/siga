@@ -210,6 +210,31 @@ func (data Vector) PayoffRatio() PayoffResult {
 	return result
 }
 
+func (price Vector) DollarCostAverage() Vector {
+	result := make(Vector, len(price))
+
+	total_invest := 0.0
+	sum_volume := 0.0
+	for i := 0; i < len(price); i++ {
+		if math.IsNaN(price[i]) || price[i] == 0 {
+			if i > 0 {
+				result[i] = result[i-1]
+			} else {
+				result[i] = math.NaN()
+			}
+			continue
+		}
+
+		total_invest += 1.0
+		volume := 1.0 / price[i]
+		sum_volume += volume
+
+		result[i] = total_invest / sum_volume
+	}
+
+	return result
+}
+
 func (data Vector) PrintTsv(precise bool) {
 	startFloatFormat := "%.3f"
 	floatFormat := "\t%.3f"

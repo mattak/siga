@@ -1,28 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"github.com/mattak/siga/cmd"
 	"log"
 	"math"
 	"testing"
 )
-
-func expectValue(t *testing.T, name string, real float64, expect float64) {
-	if math.IsNaN(expect) && math.IsNaN(real) || math.Abs(real - expect) <= 1e-9 {
-		return
-	}
-	t.Fatalf("%s is not matched: %f <=> %f", name, real, expect)
-}
-
-func expectAverageLoss(t *testing.T, name string, real cmd.AverageVariance, expect cmd.AverageVariance) {
-	expectValue(t, fmt.Sprintf("%s.Total", name), expect.Total, real.Total)
-	if expect.Count != real.Count {
-		t.Fatalf("%s.Count is not matched: %d <=> %d", name, expect.Count, real.Count)
-	}
-	expectValue(t, fmt.Sprintf("%s.Average", name), expect.Average, real.Average)
-	expectValue(t, fmt.Sprintf("%s.Variance", name), expect.Variance, real.Variance)
-}
 
 func TestTradingEvaluationResultCalculate(t *testing.T) {
 	t.Run("empty", func(t *testing.T) {

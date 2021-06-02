@@ -96,6 +96,9 @@ run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga sub -l e
 run_test $INPUT_DIR/profit_factor_123.tsv $EXPECT_DIR/expect_bare_1.tsv siga pf value
 
 # payoff ratio
-run_test $INPUT_DIR/profit_factor_123.tsv $EXPECT_DIR/expect_bare_1.tsv siga po value
+run_test $INPUT_DIR/payoff_ratio_111.tsv $EXPECT_DIR/payoff_ratio_111.tsv siga po value
+
+# trading evaluation
+run_test $INPUT_DIR/buy_sell_1.tsv $EXPECT_DIR/buy_sell_1.tsv siga te buy sell
 
 teardown

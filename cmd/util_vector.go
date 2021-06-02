@@ -172,34 +172,42 @@ func (data Vector) ProfitFactor() float64 {
 	return positive / -negative
 }
 
-func (data Vector) PayoffRatio() float64 {
-	positive := 0.0
-	negative := 0.0
-	positive_count := 0
-	negative_count := 0
+func (data Vector) PayoffRatio() PayoffResult {
+	profit := 0.0
+	loss := 0.0
+
+	result := PayoffResult{
+		PayoffRatio:   math.NaN(),
+		ProfitAverage: math.NaN(),
+		LossAverage:   math.NaN(),
+		ProfitCount:   0,
+		LossCount:     0,
+	}
 
 	for i := 0; i < len(data); i++ {
 		if data[i] >= 0 {
-			positive += data[i]
-			positive_count++
+			profit += data[i]
+			result.ProfitCount++
 		} else {
-			negative += data[i]
-			negative_count++
+			loss += data[i]
+			result.LossCount++
 		}
 	}
 
-	if negative_count == 0 || positive_count == 0 {
-		return math.NaN()
+	if result.ProfitCount != 0 {
+		result.ProfitAverage = profit / float64(result.ProfitCount)
+	}
+	if result.LossCount != 0 {
+		result.LossAverage = loss / float64(result.LossCount)
 	}
 
-	positive_mean := positive / float64(positive_count)
-	negative_mean := negative / float64(negative_count)
-
-	if negative_mean == 0 {
-		return math.Inf(1)
+	if result.LossAverage == 0 || math.IsNaN(result.LossAverage) {
+		result.PayoffRatio = math.NaN()
+	} else if result.ProfitAverage > 0 {
+		result.PayoffRatio = result.ProfitAverage / -result.LossAverage
 	}
 
-	return positive_mean / -negative_mean
+	return result
 }
 
 func (data Vector) PrintTsv(precise bool) {
@@ -217,5 +225,9 @@ func (data Vector) PrintTsv(precise bool) {
 
 	for i := 1; i < len(data); i++ {
 		fmt.Printf(floatFormat, data[i])
+	}
+
+	if len(data) > 0 {
+		fmt.Println()
 	}
 }

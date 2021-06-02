@@ -26,7 +26,7 @@ func runCommandPayoffRatio(cmd *cobra.Command, args []string) {
 	}
 
 	df := ReadDataFrameByStdinTsv()
-	result_vector := make(Vector, len(args))
+	result := make([]PayoffResult, len(args))
 
 	for i := 0; i < len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])
@@ -34,8 +34,12 @@ func runCommandPayoffRatio(cmd *cobra.Command, args []string) {
 			log.Fatalf("COLUMN_NAME or NUMBER required: %s", args[i])
 		}
 
-		result_vector[i] = vector.ProfitFactor()
-	}
+		result[i] = vector.PayoffRatio()
 
-	result_vector.PrintTsv(IsPreciseOutput)
+		if i == 0 {
+			result[i].PrintTsvHeader()
+		}
+
+		result[i].PrintTsvData(IsPreciseOutput)
+	}
 }

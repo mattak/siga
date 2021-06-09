@@ -15,6 +15,14 @@ func CreateVector(size int) Vector {
 	return data
 }
 
+func CreateVectorWithValue(size int, value float64) Vector {
+	data := make([]float64, size)
+	for i := 0; i < size; i++ {
+		data[i] = value
+	}
+	return data
+}
+
 func (data Vector) Reverse() {
 	j := len(data) - 1
 	for i := 0; i < len(data)/2; i++ {

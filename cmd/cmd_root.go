@@ -57,4 +57,5 @@ func init() {
 	RootCmd.AddCommand(PayoffRatioCmd)
 	RootCmd.AddCommand(TradingEvaluationCmd)
 	RootCmd.AddCommand(DollarCostAverageCmd)
+	RootCmd.AddCommand(GenerateCmd)
 }

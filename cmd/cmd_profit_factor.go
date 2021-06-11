@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -28,8 +29,8 @@ func runCommandProfitFactor(cmd *cobra.Command, args []string) {
 		log.Fatal("More than one COLUMN_NAME should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
-	result_vector := make(Vector, len(args))
+	df := toolkit.ReadDataFrameByStdinTsv()
+	result_vector := make(toolkit.Vector, len(args))
 
 	for i := 0; i < len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])

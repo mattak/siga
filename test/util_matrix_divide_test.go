@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"log"
 	"math"
 	"testing"
 )
 
 func TestMatrixDivide(t *testing.T) {
-	matrix := cmd.Matrix{
+	matrix := toolkit.Matrix{
 		{math.NaN(), 1, math.NaN(), 1, 0, 1, 1, 1},
 		{math.NaN(), math.NaN(), 1, 0, 1, 1, 2, 0.5},
 	}

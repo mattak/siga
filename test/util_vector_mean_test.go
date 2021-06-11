@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"math"
 	"testing"
 )
 
 func TestVectorMean(t *testing.T) {
-	data := cmd.Vector{1, 2, 3}
+	data := toolkit.Vector{1, 2, 3}
 	if data.Mean(0, 3) != 2 {
 		t.Fatal("mean value is wrong")
 	}
@@ -20,7 +20,7 @@ func TestVectorMean(t *testing.T) {
 }
 
 func TestVectorMeans(t *testing.T) {
-	data := cmd.Vector{1, 2, 3}
+	data := toolkit.Vector{1, 2, 3}
 	means := data.Means(2)
 	if len(means) != 3 {
 		t.Fatal("result length is wrong")

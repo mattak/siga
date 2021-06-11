@@ -1,6 +1,8 @@
-package cmd
+package toolkit
 
-import "math"
+import (
+	"math"
+)
 
 type Matrix []Vector
 

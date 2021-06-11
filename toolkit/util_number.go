@@ -1,4 +1,4 @@
-package cmd
+package toolkit
 
 import (
 	"math"

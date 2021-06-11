@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"log"
 	"math"
 	"testing"
 )
 
 func TestMatrixAdd(t *testing.T) {
-	matrix := cmd.Matrix{
+	matrix := toolkit.Matrix{
 		{math.NaN(), math.NaN(), 1, 1, 2},
 		{math.NaN(), 1, math.NaN(), 0, 1},
 	}

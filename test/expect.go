@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"math"
 	"testing"
 )
@@ -20,7 +20,7 @@ func expectValue(t *testing.T, name string, real float64, expect float64) {
 	t.Fatalf("%s is not matched: %f <=> %f", name, real, expect)
 }
 
-func expectAverageLoss(t *testing.T, name string, real cmd.AverageVariance, expect cmd.AverageVariance) {
+func expectAverageLoss(t *testing.T, name string, real toolkit.AverageVariance, expect toolkit.AverageVariance) {
 	expectValue(t, fmt.Sprintf("%s.Total", name), expect.Total, real.Total)
 	if expect.Count != real.Count {
 		t.Fatalf("%s.Count is not matched: %d <=> %d", name, expect.Count, real.Count)

@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,9 +31,9 @@ func runCommandShift(cmd *cobra.Command, args []string) {
 		log.Fatal("More than two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	columnName := args[0]
-	offset := ParseInt(args[1])
+	offset := toolkit.ParseInt(args[1])
 
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -27,15 +28,15 @@ func runCommandGenerateConst(cmd *cobra.Command, args []string) {
 	if len(args) != 2 {
 		log.Fatal("[LENGTH] [VALUE] should be declared")
 	}
-	length := ParseInt(args[0])
-	value := ParseFloat64(args[1])
+	length := toolkit.ParseInt(args[0])
+	value := toolkit.ParseFloat64(args[1])
 
 	// header
 	if label == "" {
 		label = "value"
 	}
 
-	column := CreateVectorWithValue(length, value)
-	df := CreateDataFrame([]string{"index", label}, []Vector{column})
+	column := toolkit.CreateVectorWithValue(length, value)
+	df := toolkit.CreateDataFrame([]string{"index", label}, []toolkit.Vector{column})
 	df.PrintTsv(IsPreciseOutput)
 }

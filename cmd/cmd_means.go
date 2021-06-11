@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -33,7 +34,7 @@ func runCommandMeans(cmd *cobra.Command, args []string) {
 	columnName := args[0]
 
 	// dataframe -> vector
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {
 		log.Fatal(err)
@@ -41,7 +42,7 @@ func runCommandMeans(cmd *cobra.Command, args []string) {
 	vector.Reverse()
 
 	for i := 1; i < len(args); i++ {
-		span := ParseInt(args[i])
+		span := toolkit.ParseInt(args[i])
 		if span <= 0 {
 			log.Fatalf("SPAN should be more than 1: %d\n", span)
 		}

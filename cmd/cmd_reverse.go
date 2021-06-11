@@ -1,6 +1,9 @@
 package cmd
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/mattak/siga/toolkit"
+	"github.com/spf13/cobra"
+)
 
 var (
 	ReverseCmd = &cobra.Command{
@@ -20,7 +23,7 @@ func init() {
 }
 
 func runCommandReverse(cmd *cobra.Command, args []string) {
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	df.Reverse()
 	df.PrintTsv(IsPreciseOutput)
 }

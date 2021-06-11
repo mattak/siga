@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"testing"
 )
 
 func TestSelectSingleColumn(t *testing.T) {
-	df := &cmd.DataFrame{}
+	df := &toolkit.DataFrame{}
 	df.Headers = []string{"date", "column1", "column2"}
 	df.Labels = []string{"seq1", "seq2"}
 	df.Data = [][]float64{
@@ -37,7 +37,7 @@ func TestSelectSingleColumn(t *testing.T) {
 }
 
 func TestSelectShuffleColumn(t *testing.T) {
-	df := &cmd.DataFrame{}
+	df := &toolkit.DataFrame{}
 	df.Headers = []string{"date", "column1", "column2"}
 	df.Labels = []string{"seq1", "seq2"}
 	df.Data = [][]float64{
@@ -74,7 +74,7 @@ func TestSelectShuffleColumn(t *testing.T) {
 }
 
 func TestSelectWrongColumn(t *testing.T) {
-	df := &cmd.DataFrame{}
+	df := &toolkit.DataFrame{}
 	df.Headers = []string{"date", "column1", "column2"}
 	df.Labels = []string{"seq1", "seq2"}
 	df.Data = [][]float64{

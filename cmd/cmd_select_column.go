@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -27,7 +28,7 @@ func runCommandSelectColumn(cmd *cobra.Command, args []string) {
 		log.Fatal("COLUMN_NAME should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	err := df.SelectColumn(args...)
 	if err != nil {
 		log.Fatal(err)

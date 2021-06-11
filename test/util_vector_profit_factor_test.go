@@ -1,19 +1,19 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"math"
 	"testing"
 )
 
 func TestProfitFactor(t *testing.T) {
-	if !math.IsInf((cmd.Vector{1, 2, 3}).ProfitFactor(), 1) {
+	if !math.IsInf((toolkit.Vector{1, 2, 3}).ProfitFactor(), 1) {
 		t.Fatal("result should be infinite")
 	}
-	if (cmd.Vector{-1, -2, -3}).ProfitFactor() != 0 {
+	if (toolkit.Vector{-1, -2, -3}).ProfitFactor() != 0 {
 		t.Fatal("result should be 0")
 	}
-	if (cmd.Vector{-1, -2, 3}).ProfitFactor() != 1 {
+	if (toolkit.Vector{-1, -2, 3}).ProfitFactor() != 1 {
 		t.Fatal("result should be 0")
 	}
 }

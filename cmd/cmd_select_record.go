@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -28,14 +29,14 @@ func runCommandSelectRecord(cmd *cobra.Command, args []string) {
 		log.Fatal("LABEL_NAME or NUMBER should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	indexes := make([]int, len(args))
 	for i := 0; i < len(args); i++ {
 		index := df.FindLabelIndex(args[i])
 		if index != -1 {
 			indexes[i] = index
 		} else {
-			index = ParseInt(args[i])
+			index = toolkit.ParseInt(args[i])
 			if index >= 0 {
 				indexes[i] = index
 			} else {

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/cmd"
+	"github.com/mattak/siga/toolkit"
 	"math"
 	"testing"
 )
 
 func TestVectorHasAnyValue(t *testing.T) {
-	data := cmd.Vector{1, 2, 3, math.NaN()}
+	data := toolkit.Vector{1, 2, 3, math.NaN()}
 	if data.HasAnyValue(0) {
 		t.Fatal("0 should not be detected")
 	}

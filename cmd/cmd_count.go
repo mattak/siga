@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 )
 
@@ -22,6 +23,6 @@ func init() {
 }
 
 func runCommandCount(cmd *cobra.Command, args []string) {
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	fmt.Println(len(df.Labels))
 }

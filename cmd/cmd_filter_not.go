@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -27,7 +28,7 @@ func runCommandFilterNot(cmd *cobra.Command, args []string) {
 		log.Fatal("Two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 	indexes := matrix.FilterNotIndex()

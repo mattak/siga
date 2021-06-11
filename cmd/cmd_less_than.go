@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -29,7 +30,7 @@ func runCommandLessThan(cmd *cobra.Command, args []string) {
 		log.Fatal("Two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.LessThan()

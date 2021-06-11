@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,7 +31,7 @@ func runCommandRename(cmd *cobra.Command, args []string) {
 		log.Fatal("Argument length should be even")
 	}
 
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 	headers := df.Headers
 
 	for i := 0; i < len(args); i += 2 {

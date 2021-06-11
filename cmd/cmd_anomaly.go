@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -31,8 +32,8 @@ func runCommandAnomaly(cmd *cobra.Command, args []string) {
 	}
 
 	columnName := args[0]
-	span := ParseInt(args[1])
-	df := ReadDataFrameByStdinTsv()
+	span := toolkit.ParseInt(args[1])
+	df := toolkit.ReadDataFrameByStdinTsv()
 
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {

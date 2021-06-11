@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/toolkit"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -26,9 +27,9 @@ func runCommandSum(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		log.Fatal("More than 1 COLUMN_NAME should be declared")
 	}
-	df := ReadDataFrameByStdinTsv()
+	df := toolkit.ReadDataFrameByStdinTsv()
 
-	sum_vector := make(Vector, len(args))
+	sum_vector := make(toolkit.Vector, len(args))
 
 	for i := 0; i<len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])

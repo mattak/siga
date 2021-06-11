@@ -3,6 +3,7 @@ package toolkit
 import (
 	"fmt"
 	"math"
+	"math/rand"
 )
 
 type Vector []float64
@@ -19,6 +20,21 @@ func CreateVectorWithValue(size int, value float64) Vector {
 	data := make([]float64, size)
 	for i := 0; i < size; i++ {
 		data[i] = value
+	}
+	return data
+}
+
+func CreateVectorWithRandom(size int, fromValue float64, toValue float64) Vector {
+	if toValue < fromValue {
+		tmp := fromValue
+		fromValue = toValue
+		toValue = tmp
+	}
+	span := toValue - fromValue
+
+	data := make([]float64, size)
+	for i := 0; i < size; i++ {
+		data[i] = rand.Float64()*span + fromValue
 	}
 	return data
 }

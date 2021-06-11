@@ -11,12 +11,10 @@ var (
 
 		Short: "Generate sequence",
 		Long:  "Generate sequence",
-		Example: `
-  siga gen const 10 2 < sample.tsv
-`,
 	}
 )
 
 func init() {
 	GenerateCmd.AddCommand(GenerateConstCmd)
+	GenerateCmd.AddCommand(GenerateRandomCmd)
 }

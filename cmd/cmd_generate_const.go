@@ -14,7 +14,7 @@ var (
 		Short: "Generate const sequence",
 		Long:  "Generate const sequence",
 		Example: `
-  siga gen const 10 2 < sample.tsv
+  siga gen const 10 2
 `,
 		Run: runCommandGenerateConst,
 	}

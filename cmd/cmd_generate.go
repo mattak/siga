@@ -17,4 +17,5 @@ var (
 func init() {
 	GenerateCmd.AddCommand(GenerateConstCmd)
 	GenerateCmd.AddCommand(GenerateRandomCmd)
+	GenerateCmd.AddCommand(GenerateRwalkCmd)
 }

@@ -15,7 +15,7 @@ var (
 		Long:  "Generate random sequence",
 		Example: `
 generate range (0,1) values
-  siga gen rand 10 0 1 < sample.tsv
+  siga gen rand 10 0 1
 `,
 		Run: runCommandGenerateRandom,
 	}

@@ -104,4 +104,7 @@ run_test $INPUT_DIR/buy_sell_1.tsv $EXPECT_DIR/buy_sell_1.tsv siga te buy sell
 # dollar cost average
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/dollar_cost_average_123.tsv siga dca value
 
+# normalize
+run_test $INPUT_DIR/multi_421.tsv $EXPECT_DIR/normalize_421.tsv siga normal value
+
 teardown

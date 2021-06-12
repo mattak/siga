@@ -11,7 +11,7 @@ var (
 		Long:  "Signal Analyzer for sequential data",
 	}
 	IsPreciseOutput = false
-	label = ""
+	label           = ""
 )
 
 func Execute() error {
@@ -58,4 +58,5 @@ func init() {
 	RootCmd.AddCommand(TradingEvaluationCmd)
 	RootCmd.AddCommand(DollarCostAverageCmd)
 	RootCmd.AddCommand(GenerateCmd)
+	RootCmd.AddCommand(NormalizeCmd)
 }

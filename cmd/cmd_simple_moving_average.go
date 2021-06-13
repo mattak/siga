@@ -8,24 +8,25 @@ import (
 )
 
 var (
-	MeansCmd = &cobra.Command{
-		Use:     "means [COLUMN_NAME] [SPAN]+",
-		Aliases: []string{"mn"},
+	SimpleMovingAverageCmd = &cobra.Command{
+		Use:     "simple_moving_average [COLUMN_NAME] [SPAN]+",
+		Aliases: []string{"sma"},
 
-		Short: "means vector calculation",
-		Long:  "means vector calculation",
+		Short: "simple moving average vector calculation",
+		Long:  "simple moving average vector calculation",
 		Example: `
-  siga mn volume 20
-  siga mn volume 20 5 1
+  siga sma volume 20
+  siga sma volume 20 5 1
 `,
-		Run: runCommandMeans,
+		Run: runSimpleMovingAverage,
 	}
 )
 
 func init() {
+	SimpleMovingAverageCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
-func runCommandMeans(cmd *cobra.Command, args []string) {
+func runSimpleMovingAverage(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
@@ -47,9 +48,15 @@ func runCommandMeans(cmd *cobra.Command, args []string) {
 			log.Fatalf("SPAN should be more than 1: %d\n", span)
 		}
 
-		line := vector.Means(span)
+		line := vector.SimpleMovingAverage(span)
 		line.Reverse()
-		err = df.AddColumn(fmt.Sprintf("mean_%s_%d", columnName, span), line)
+
+		newLabel := label
+		if label == "" {
+			newLabel = fmt.Sprintf("sma_%d_%s", span, columnName)
+		}
+
+		err = df.AddColumn(newLabel, line)
 		if err != nil {
 			log.Fatal(err)
 		}

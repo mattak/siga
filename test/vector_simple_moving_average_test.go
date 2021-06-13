@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestVectorMean(t *testing.T) {
+func TestVectorSimpleMovingAverage(t *testing.T) {
 	data := toolkit.Vector{1, 2, 3}
 	if data.Mean(0, 3) != 2 {
 		t.Fatal("mean value is wrong")
@@ -19,9 +19,9 @@ func TestVectorMean(t *testing.T) {
 	}
 }
 
-func TestVectorMeans(t *testing.T) {
+func TestVectorSimpleMovingAverages(t *testing.T) {
 	data := toolkit.Vector{1, 2, 3}
-	means := data.Means(2)
+	means := data.SimpleMovingAverage(2)
 	if len(means) != 3 {
 		t.Fatal("result length is wrong")
 	}

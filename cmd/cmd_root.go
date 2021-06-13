@@ -28,7 +28,7 @@ func init() {
 	RootCmd.AddCommand(VersionCmd)
 	RootCmd.AddCommand(IdentityCmd)
 	RootCmd.AddCommand(AnomalyCmd)
-	RootCmd.AddCommand(MeansCmd)
+	RootCmd.AddCommand(SimpleMovingAverageCmd)
 	RootCmd.AddCommand(DeviationsCmd)
 	RootCmd.AddCommand(MultiplyCmd)
 	RootCmd.AddCommand(DivideCmd)

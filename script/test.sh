@@ -69,6 +69,9 @@ run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 # sum
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sum_123.tsv siga sum value 3
 
+# sma
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sma_123.tsv siga sma value 3
+
 # identity
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/id_1.tsv siga id
 

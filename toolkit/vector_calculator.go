@@ -49,6 +49,20 @@ func (data Vector) Mean(start, length int) float64 {
 	return data.Sum(start, length) / float64(length)
 }
 
+func (data Vector) HarmonicMean(start, length int) float64 {
+	// D = a1, a2, a3
+	// D' = 1/a1, 1/a2, 1/a3
+	// R = Count(D')/Sum(D')
+	sum := 0.0
+	for i := start; i < start+length; i++ {
+		sum += 1 / data[i]
+	}
+	if sum == 0.0 {
+		return math.NaN()
+	}
+	return float64(length) / sum
+}
+
 func (data Vector) DeviationSquare(start, length int) float64 {
 	mean := data.Mean(start, length)
 	result := 0.0

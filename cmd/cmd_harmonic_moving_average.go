@@ -8,25 +8,25 @@ import (
 )
 
 var (
-	SimpleMovingAverageCmd = &cobra.Command{
-		Use:     "simple_moving_average [COLUMN_NAME] [SPAN]+",
-		Aliases: []string{"sma"},
+	HarmonicMovingAverageCmd = &cobra.Command{
+		Use:     "harmonic_moving_average [COLUMN_NAME] [SPAN]+",
+		Aliases: []string{"hma"},
 
-		Short: "simple moving average vector calculation",
-		Long:  "simple moving average vector calculation",
+		Short: "harmonic moving average vector calculation",
+		Long:  "harmonic moving average vector calculation",
 		Example: `
-  siga sma volume 20
-  siga sma volume 20 5 1
+  siga hma volume 20
+  siga hma volume 20 5 1
 `,
-		Run: runSimpleMovingAverage,
+		Run: runHarmonicMovingAverage,
 	}
 )
 
 func init() {
-	SimpleMovingAverageCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
+	HarmonicMovingAverageCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
-func runSimpleMovingAverage(cmd *cobra.Command, args []string) {
+func runHarmonicMovingAverage(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
@@ -48,12 +48,12 @@ func runSimpleMovingAverage(cmd *cobra.Command, args []string) {
 			log.Fatalf("SPAN should be more than 1: %d\n", span)
 		}
 
-		line := vector.SimpleMovingAverage(span)
+		line := vector.HarmonicMovingAverage(span)
 		line.Reverse()
 
 		newLabel := label
 		if label == "" {
-			newLabel = fmt.Sprintf("sma_%s_%d", columnName, span)
+			newLabel = fmt.Sprintf("hma_%s_%d", columnName, span)
 		}
 
 		err = df.AddColumn(newLabel, line)

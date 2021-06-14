@@ -41,7 +41,6 @@ func init() {
 	RootCmd.AddCommand(ConstCmd)
 	RootCmd.AddCommand(ShiftCmd)
 	RootCmd.AddCommand(FilterCmd)
-	RootCmd.AddCommand(FilterNotCmd)
 	RootCmd.AddCommand(EqualCmd)
 	RootCmd.AddCommand(GreaterEqualCmd)
 	RootCmd.AddCommand(GreaterThanCmd)

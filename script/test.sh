@@ -63,6 +63,12 @@ run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga eq -l ex
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_1_single_1.tsv siga eq -l expect value 1
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga eq -l expect value 2
 
+# filter or
+run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_or_123.tsv siga filter or 1 value1 value2
+run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_nor_123.tsv siga filter nor 1 value1 value2
+run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_and_123.tsv siga filter and 1 value1 value2
+run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_nand_123.tsv siga filter nand 1 value1 value2
+
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 

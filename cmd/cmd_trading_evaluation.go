@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -31,8 +31,8 @@ func runCommandTradingEvaluation(cmd *cobra.Command, args []string) {
 		log.Fatal("BUY_COLUMN_NAME|BUY_NUMBER, SELL_COLUMN_NAME|SELL_NUMBER should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
-	buysell := make([]toolkit.Vector, 2)
+	df := pkg.ReadDataFrameByStdinTsv()
+	buysell := make([]pkg.Vector, 2)
 
 	for i := 0; i < 2; i++ {
 		vector, err := df.ExtractColumn(args[i])
@@ -43,13 +43,13 @@ func runCommandTradingEvaluation(cmd *cobra.Command, args []string) {
 			if err != nil {
 				log.Fatalf("COLUMN_NAME or NUMBER required: %s", args[i])
 			} else {
-				buysell[i] = toolkit.CreateVector(len(df.Labels))
+				buysell[i] = pkg.CreateVector(len(df.Labels))
 				buysell[i].Fill(v)
 			}
 		}
 	}
 
-	result, err := toolkit.CreateTradingEvaluationResult(buysell[0], buysell[1])
+	result, err := pkg.CreateTradingEvaluationResult(buysell[0], buysell[1])
 	if err != nil {
 		log.Fatal(err)
 	}

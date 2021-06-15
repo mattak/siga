@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -27,10 +27,10 @@ func runCommandFilterOr(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("[NUMBER] [COLUMN_NAME]+ should be declared")
 	}
-	targetValue := toolkit.ParseFloat64(args[0])
+	targetValue := pkg.ParseFloat64(args[0])
 	columnNames := args[1:]
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 	matrix := df.ExtractMatrixByColumnNameOrValue(columnNames)
 	indexes := matrix.FilterIndexByOr(targetValue)
 	df.SelectRecords(indexes...)

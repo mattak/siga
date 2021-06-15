@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"log"
 	"math"
 	"testing"
 )
 
 func TestMatrixGreaterThan(t *testing.T) {
-	matrix := toolkit.Matrix{
+	matrix := pkg.Matrix{
 		{math.NaN(), math.NaN(), 2, 1, 0},
 		{math.NaN(), 1, 1, 1, 1},
 	}

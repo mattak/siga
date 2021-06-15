@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"testing"
 )
 
 func TestCreateVectorWithRandom(t *testing.T) {
-	vector1 := toolkit.CreateVectorWithRandom(3, 0, 1)
-	vector2 := toolkit.CreateVectorWithRandom(3, 0, 1)
+	vector1 := pkg.CreateVectorWithRandom(3, 0, 1)
+	vector2 := pkg.CreateVectorWithRandom(3, 0, 1)
 
 	if len(vector1) != 3 || len(vector2) != 3 {
 		t.Fatal("wrong size of vector")

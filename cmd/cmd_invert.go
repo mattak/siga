@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -31,7 +31,7 @@ func runCommandInvert(cmd *cobra.Command, args []string) {
 		log.Fatal("More than two COLUMN_NAME should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 	columnName := args[0]
 
 	vector, err := df.ExtractColumn(columnName)

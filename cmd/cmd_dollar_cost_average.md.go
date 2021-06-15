@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,9 +30,9 @@ func runCommandDollarCost(cmd *cobra.Command, args []string) {
 		log.Fatal("More than one COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 
-	results := make([]toolkit.Vector, len(args))
+	results := make([]pkg.Vector, len(args))
 	for i := 0; i < len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])
 		if err == nil {

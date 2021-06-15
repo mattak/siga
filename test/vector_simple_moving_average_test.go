@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"math"
 	"testing"
 )
 
 func TestVectorSimpleMovingAverage(t *testing.T) {
-	data := toolkit.Vector{1, 2, 3}
+	data := pkg.Vector{1, 2, 3}
 	if data.Mean(0, 3) != 2 {
 		t.Fatal("mean value is wrong")
 	}
@@ -20,7 +20,7 @@ func TestVectorSimpleMovingAverage(t *testing.T) {
 }
 
 func TestVectorSimpleMovingAverages(t *testing.T) {
-	data := toolkit.Vector{1, 2, 3}
+	data := pkg.Vector{1, 2, 3}
 	means := data.SimpleMovingAverage(2)
 	if len(means) != 3 {
 		t.Fatal("result length is wrong")

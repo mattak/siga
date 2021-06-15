@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,7 +30,7 @@ func runCommandLessEqual(cmd *cobra.Command, args []string) {
 		log.Fatal("Two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.LessEqual()

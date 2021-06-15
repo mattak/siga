@@ -1,4 +1,4 @@
-package toolkit
+package pkg
 
 import (
 	"io/ioutil"

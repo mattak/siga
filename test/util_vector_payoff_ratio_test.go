@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"math"
 	"testing"
 )
 
 func TestPayoffRatio(t *testing.T) {
-	result1 := (toolkit.Vector{1, 2, 3}).PayoffRatio()
+	result1 := (pkg.Vector{1, 2, 3}).PayoffRatio()
 	if !math.IsNaN(result1.PayoffRatio) {
 		t.Fatal("result1 payoff ratio is wrong", result1.PayoffRatio)
 	}
@@ -18,7 +18,7 @@ func TestPayoffRatio(t *testing.T) {
 		t.Fatal("result1 loss is wrong")
 	}
 
-	result2 := (toolkit.Vector{-1, -2, -3}).PayoffRatio()
+	result2 := (pkg.Vector{-1, -2, -3}).PayoffRatio()
 	if !math.IsNaN(result2.PayoffRatio) {
 		t.Fatal("result2 payoff ratio is wrong")
 	}
@@ -29,7 +29,7 @@ func TestPayoffRatio(t *testing.T) {
 		t.Fatal("result2 loss is wrong", result2.LossAverage)
 	}
 
-	result3 := (toolkit.Vector{2, -1}).PayoffRatio()
+	result3 := (pkg.Vector{2, -1}).PayoffRatio()
 	if result3.PayoffRatio != 2 {
 		t.Fatal("result3 payoff ratio is wrong")
 	}
@@ -40,7 +40,7 @@ func TestPayoffRatio(t *testing.T) {
 		t.Fatal("result3 loss is wrong")
 	}
 
-	result4 := (toolkit.Vector{1, 1, -1}).PayoffRatio()
+	result4 := (pkg.Vector{1, 1, -1}).PayoffRatio()
 	if result4.PayoffRatio != 1 {
 		t.Fatal("result4 payoff ratio is wrong")
 	}

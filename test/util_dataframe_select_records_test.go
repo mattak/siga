@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"testing"
 )
 
 func TestSelectRecords(t *testing.T) {
-	df := &toolkit.DataFrame{}
+	df := &pkg.DataFrame{}
 	df.Headers = []string{"date", "column1"}
 	df.Labels = []string{"seq1", "seq2", "seq3", "seq4"}
 	df.Data = [][]float64{

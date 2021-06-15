@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"testing"
 )
 
 func TestFindLabelIndex(t *testing.T) {
-	df := &toolkit.DataFrame{}
+	df := &pkg.DataFrame{}
 	df.Headers = []string{"date", "column1", "column2"}
 	df.Labels = []string{"seq1", "seq2", "seq3"}
 	df.Data = [][]float64{

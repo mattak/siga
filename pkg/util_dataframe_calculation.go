@@ -1,4 +1,4 @@
-package toolkit
+package pkg
 
 func (df *DataFrame) Sum(column, from, size int) float64 {
 	sum := 0.0

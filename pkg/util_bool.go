@@ -1,4 +1,4 @@
-package toolkit
+package pkg
 
 func BoolToFloat64(result bool) float64 {
 	if result {

@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -33,11 +33,11 @@ func runCommandDivide(cmd *cobra.Command, args []string) {
 		log.Fatal("More than two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 
-	matrix := make(toolkit.Matrix, len(args))
+	matrix := make(pkg.Matrix, len(args))
 	for i := 0; i < len(args); i++ {
-		matrix[i] = toolkit.CreateVector(len(df.Labels))
+		matrix[i] = pkg.CreateVector(len(df.Labels))
 
 		vector, err := df.ExtractColumn(args[i])
 		if err == nil {

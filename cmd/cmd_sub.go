@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 	"strconv"
@@ -31,11 +31,11 @@ func runCommandSub(cmd *cobra.Command, args []string) {
 	if len(args) < 1 {
 		log.Fatal("More than 1 COLUMN_NAME should be declared")
 	}
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 
-	matrix := make(toolkit.Matrix, len(args))
+	matrix := make(pkg.Matrix, len(args))
 	for i := 0; i < len(args); i++ {
-		matrix[i] = toolkit.CreateVector(len(df.Labels))
+		matrix[i] = pkg.CreateVector(len(df.Labels))
 
 		vector, err := df.ExtractColumn(args[i])
 		if err == nil {

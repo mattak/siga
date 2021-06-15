@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"testing"
 )
 
 func TestVectorSum(t *testing.T) {
-	data := toolkit.Vector{1,2,3}
+	data := pkg.Vector{1,2,3}
 	if data.Sum(0, 3) != 6 {
 		t.Fatal("sum value is wrong")
 	}

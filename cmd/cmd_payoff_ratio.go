@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -26,8 +26,8 @@ func runCommandPayoffRatio(cmd *cobra.Command, args []string) {
 		log.Fatal("More than one COLUMN_NAME should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
-	result := make([]toolkit.PayoffResult, len(args))
+	df := pkg.ReadDataFrameByStdinTsv()
+	result := make([]pkg.PayoffResult, len(args))
 
 	for i := 0; i < len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"math"
 	"testing"
 )
 
 func TestDollarCostAverage(t *testing.T) {
 	t.Run("normal", func(t *testing.T) {
-		data := toolkit.Vector{1, 2, 3}
+		data := pkg.Vector{1, 2, 3}
 
 		v := data.DollarCostAverage()
 		ExpectInt(t, "len(v)", len(v), 3)
@@ -18,7 +18,7 @@ func TestDollarCostAverage(t *testing.T) {
 	})
 
 	t.Run("nan1", func(t *testing.T) {
-		data := toolkit.Vector{1, math.NaN(), 3}
+		data := pkg.Vector{1, math.NaN(), 3}
 
 		v := data.DollarCostAverage()
 		ExpectInt(t, "len(v)", len(v), 3)
@@ -28,7 +28,7 @@ func TestDollarCostAverage(t *testing.T) {
 	})
 
 	t.Run("zero1", func(t *testing.T) {
-		data := toolkit.Vector{1, 0, 3}
+		data := pkg.Vector{1, 0, 3}
 
 		v := data.DollarCostAverage()
 		ExpectInt(t, "len(v)", len(v), 3)
@@ -38,7 +38,7 @@ func TestDollarCostAverage(t *testing.T) {
 	})
 
 	t.Run("nan0", func(t *testing.T) {
-		data := toolkit.Vector{math.NaN(), 2, 3}
+		data := pkg.Vector{math.NaN(), 2, 3}
 
 		v := data.DollarCostAverage()
 		ExpectInt(t, "len(v)", len(v), 3)
@@ -48,7 +48,7 @@ func TestDollarCostAverage(t *testing.T) {
 	})
 
 	t.Run("zero0", func(t *testing.T) {
-		data := toolkit.Vector{0, 2, 3}
+		data := pkg.Vector{0, 2, 3}
 
 		v := data.DollarCostAverage()
 		ExpectInt(t, "len(v)", len(v), 3)

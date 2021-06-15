@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -31,10 +31,10 @@ func runCommandConst(cmd *cobra.Command, args []string) {
 		log.Fatal("NUMBER should be declared")
 	}
 
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 	for i := 0; i < len(args); i++ {
-		n := toolkit.ParseFloat64(args[i])
-		vector := toolkit.CreateVector(len(df.Labels))
+		n := pkg.ParseFloat64(args[i])
+		vector := pkg.CreateVector(len(df.Labels))
 		vector.Fill(n)
 
 		if label == "" {

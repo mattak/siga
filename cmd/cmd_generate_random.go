@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -29,16 +29,16 @@ func runCommandGenerateRandom(cmd *cobra.Command, args []string) {
 	if len(args) != 3 {
 		log.Fatal("[LENGTH] [FROM] [TO] should be declared")
 	}
-	length := toolkit.ParseInt(args[0])
-	fromValue := toolkit.ParseFloat64(args[1])
-	toValue := toolkit.ParseFloat64(args[2])
+	length := pkg.ParseInt(args[0])
+	fromValue := pkg.ParseFloat64(args[1])
+	toValue := pkg.ParseFloat64(args[2])
 
 	// header
 	if label == "" {
 		label = "value"
 	}
 
-	column := toolkit.CreateVectorWithRandom(length, fromValue, toValue)
-	df := toolkit.CreateDataFrame([]string{"index", label}, []toolkit.Vector{column})
+	column := pkg.CreateVectorWithRandom(length, fromValue, toValue)
+	df := pkg.CreateDataFrame([]string{"index", label}, []pkg.Vector{column})
 	df.PrintTsv(IsPreciseOutput)
 }

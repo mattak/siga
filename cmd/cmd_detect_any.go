@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/toolkit"
+	"github.com/mattak/siga/pkg"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -35,14 +35,14 @@ func init() {
 }
 
 func runCommandDetectAny(cmd *cobra.Command, args []string) {
-	df := toolkit.ReadDataFrameByStdinTsv()
+	df := pkg.ReadDataFrameByStdinTsv()
 	if len(args) < 1 {
 		log.Fatal("COLUMN_NAME must be declared")
 	}
 	columnName := args[0]
 	detectValue := 1.0
 	if len(args) >= 2 {
-		detectValue = toolkit.ParseFloat64(args[1])
+		detectValue = pkg.ParseFloat64(args[1])
 	}
 
 	vector, err := df.ExtractColumn(columnName)

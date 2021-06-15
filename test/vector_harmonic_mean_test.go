@@ -15,7 +15,7 @@ func TestHarmonicMean(t *testing.T) {
 	})
 	t.Run("empty", func(t *testing.T) {
 		data := toolkit.Vector{}
-		result := data.Mean(0, 0)
+		result := data.HarmonicMean(0, 0)
 		ExpectValue(t, "result", result, math.NaN())
 	})
 }

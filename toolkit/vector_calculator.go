@@ -1,6 +1,8 @@
 package toolkit
 
-import "math"
+import (
+	"math"
+)
 
 func (data Vector) HasAnyValue(value float64) bool {
 	if math.IsNaN(value) {
@@ -61,6 +63,54 @@ func (data Vector) HarmonicMean(start, length int) float64 {
 		return math.NaN()
 	}
 	return float64(length) / sum
+}
+
+func (data Vector) ValueMean(start, length int) float64 {
+	target_value := 0.0
+	amounts := 0.0
+	invests := 0.0
+
+	for i := start; i < start+length; i++ {
+		target_value += 1.0
+		current_value := amounts * data[i]
+		diff := target_value - current_value
+		if diff > 0 {
+			amount := diff / data[i]
+			amounts += amount
+			invests += diff
+		}
+	}
+
+	if amounts > 0 {
+		return invests / amounts
+	}
+	return math.NaN()
+}
+
+func (data Vector) MartinegaleMean(start, length int, threshold float64) float64 {
+	if length < 1 || len(data) < 1 {
+		return math.NaN()
+	}
+
+	last_value := data[0] * threshold
+	step := 1.0
+	invests := step
+	amounts := step / data[0]
+
+	for i := start + 1; i < start+length; i++ {
+		if data[i] < last_value {
+			step *= 2.0
+			invests += step
+			amounts += step / data[i]
+			last_value = (invests / amounts) * threshold
+		}
+	}
+
+	if amounts > 0 {
+		return invests / amounts
+	}
+
+	return math.NaN()
 }
 
 func (data Vector) DeviationSquare(start, length int) float64 {

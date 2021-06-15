@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -26,8 +26,8 @@ func runCommandPayoffRatio(cmd *cobra.Command, args []string) {
 		log.Fatal("More than one COLUMN_NAME should be declared")
 	}
 
-	df := pkg.ReadDataFrameByStdinTsv()
-	result := make([]pkg.PayoffResult, len(args))
+	df := dataframe.ReadDataFrameByStdinTsv()
+	result := make([]dataframe.PayoffResult, len(args))
 
 	for i := 0; i < len(args); i++ {
 		vector, err := df.ExtractColumn(args[i])
@@ -35,7 +35,7 @@ func runCommandPayoffRatio(cmd *cobra.Command, args []string) {
 			log.Fatalf("COLUMN_NAME or NUMBER required: %s", args[i])
 		}
 
-		result[i] = vector.PayoffRatio()
+		result[i] = dataframe.PayoffRatio(vector)
 
 		if i == 0 {
 			result[i].PrintTsvHeader()

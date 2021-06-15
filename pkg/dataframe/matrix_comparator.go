@@ -1,6 +1,9 @@
-package pkg
+package dataframe
 
-import "math"
+import (
+	"github.com/mattak/siga/pkg/util"
+	"math"
+)
 
 func (data Matrix) GreaterEqual() Vector {
 	result := CreateVector(len(data[0]))
@@ -87,7 +90,7 @@ func (data Matrix) Equal() Vector {
 				}
 			}
 		}
-		result[i] = BoolToFloat64(isAllSame)
+		result[i] = util.BoolToFloat64(isAllSame)
 	}
 	return result
 }

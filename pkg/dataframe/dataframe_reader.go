@@ -1,6 +1,7 @@
-package pkg
+package dataframe
 
 import (
+	"github.com/mattak/siga/pkg/util"
 	"io/ioutil"
 	"log"
 	"os"
@@ -35,7 +36,7 @@ func ReadDataFrameByStdinTsv() *DataFrame {
 		df.Data[i-1] = make([]float64, len(cells)-1)
 
 		for j := 1; j < len(cells); j++ {
-			df.Data[i-1][j-1] = ParseFloat64(cells[j])
+			df.Data[i-1][j-1] = util.ParseFloat64(cells[j])
 		}
 	}
 	return df

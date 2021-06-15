@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,11 +30,11 @@ func runCommandNormalize(cmd *cobra.Command, args []string) {
 		log.Fatal("More than one COLUMN_NAME should be declared")
 	}
 
-	df := pkg.ReadDataFrameByStdinTsv()
+	df := dataframe.ReadDataFrameByStdinTsv()
 
-	matrix := make(pkg.Matrix, len(args))
+	matrix := make(dataframe.Matrix, len(args))
 	for i := 0; i < len(args); i++ {
-		matrix[i] = pkg.CreateVector(len(df.Labels))
+		matrix[i] = dataframe.CreateVector(len(df.Labels))
 
 		column, err := df.ExtractColumn(args[i])
 		if err != nil {

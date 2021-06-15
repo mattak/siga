@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"testing"
 )
 
 func TestDataFrameTake(t *testing.T) {
 	t.Run("overflow", func(t *testing.T) {
-		df := &pkg.DataFrame{}
+		df := &dataframe.DataFrame{}
 		df.Headers = []string{"date", "column1", "column2"}
 		df.Labels = []string{"seq1", "seq2"}
 		df.Data = [][]float64{
@@ -31,7 +31,7 @@ func TestDataFrameTake(t *testing.T) {
 	})
 
 	t.Run("just", func(t *testing.T) {
-		df := &pkg.DataFrame{}
+		df := &dataframe.DataFrame{}
 		df.Headers = []string{"date", "column1", "column2"}
 		df.Labels = []string{"seq1", "seq2"}
 		df.Data = [][]float64{
@@ -55,7 +55,7 @@ func TestDataFrameTake(t *testing.T) {
 	})
 
 	t.Run("below", func(t *testing.T) {
-		df := &pkg.DataFrame{}
+		df := &dataframe.DataFrame{}
 		df.Headers = []string{"date", "column1", "column2"}
 		df.Labels = []string{"seq1", "seq2"}
 		df.Data = [][]float64{
@@ -76,7 +76,7 @@ func TestDataFrameTake(t *testing.T) {
 	})
 
 	t.Run("zero", func(t *testing.T) {
-		df := &pkg.DataFrame{}
+		df := &dataframe.DataFrame{}
 		df.Headers = []string{"date", "column1", "column2"}
 		df.Labels = []string{"seq1", "seq2"}
 		df.Data = [][]float64{

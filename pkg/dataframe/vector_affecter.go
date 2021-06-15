@@ -1,4 +1,4 @@
-package pkg
+package dataframe
 
 func (data Vector) Reverse() {
 	j := len(data) - 1

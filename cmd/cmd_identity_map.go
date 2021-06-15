@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/spf13/cobra"
 )
 
@@ -29,6 +29,6 @@ func init() {
 }
 
 func runCommandIdentity(cmd *cobra.Command, args []string) {
-	df := pkg.ReadDataFrameByStdinTsv()
+	df := dataframe.ReadDataFrameByStdinTsv()
 	df.PrintTsv(IsPreciseOutput)
 }

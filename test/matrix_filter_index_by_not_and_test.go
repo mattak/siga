@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"math"
 	"testing"
 )
 
 func TestMatrixFilterNotIndex(t *testing.T) {
-	matrix := pkg.Matrix{
+	matrix := dataframe.Matrix{
 		{math.NaN(), math.NaN(), 2, 1, 0},
 		{math.NaN(), 1, 1, 1, 1},
 	}

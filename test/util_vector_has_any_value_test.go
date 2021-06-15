@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"math"
 	"testing"
 )
 
 func TestVectorHasAnyValue(t *testing.T) {
-	data := pkg.Vector{1, 2, 3, math.NaN()}
+	data := dataframe.Vector{1, 2, 3, math.NaN()}
 	if data.HasAnyValue(0) {
 		t.Fatal("0 should not be detected")
 	}

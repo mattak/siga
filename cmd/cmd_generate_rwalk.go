@@ -1,7 +1,8 @@
 package cmd
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
+	"github.com/mattak/siga/pkg/util"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -30,23 +31,23 @@ func runCommandGenerateRandomWalk(cmd *cobra.Command, args []string) {
 	if len(args) < 2 {
 		log.Fatal("[LENGTH] [START_VALUE] ([WEIGHT],[FROM],[TO]) should be declared")
 	}
-	length := pkg.ParseInt(args[0])
-	startValue := pkg.ParseFloat64(args[1])
-	rwalks := make([]pkg.RwalkValue, len(args)-2)
+	length := util.ParseInt(args[0])
+	startValue := util.ParseFloat64(args[1])
+	rwalks := make([]dataframe.RwalkValue, len(args)-2)
 
 	for i := 2; i < len(args); i++ {
 		index := (i - 2)
-		rwalks[index] = pkg.CreateRwalkValue(args[i], ":")
+		rwalks[index] = dataframe.CreateRwalkValue(args[i], ":")
 	}
 
-	rwalkSetting := pkg.CreateRwalkSetting(startValue, rwalks)
+	rwalkSetting := dataframe.CreateRwalkSetting(startValue, rwalks)
 
 	// header
 	if label == "" {
 		label = "value"
 	}
 
-	column := pkg.CreateVectorWithRandomWalk(length, rwalkSetting)
-	df := pkg.CreateDataFrame([]string{"index", label}, []pkg.Vector{column})
+	column := dataframe.CreateVectorWithRandomWalk(length, rwalkSetting)
+	df := dataframe.CreateDataFrame([]string{"index", label}, []dataframe.Vector{column})
 	df.PrintTsv(IsPreciseOutput)
 }

@@ -1,4 +1,4 @@
-package pkg
+package dataframe
 
 func (df *DataFrame) SelectRecords(indexes ...int) {
 	labels := make([]string, len(indexes))

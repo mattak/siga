@@ -1,6 +1,7 @@
-package pkg
+package dataframe
 
 import (
+	"github.com/mattak/siga/pkg/util"
 	"math/rand"
 	"strings"
 )
@@ -20,10 +21,10 @@ func CreateRwalkValue(text string, delimiter string) RwalkValue {
 	values := strings.Split(text, delimiter)
 
 	return RwalkValue{
-		Weight: ParseFloat64(values[0]),
+		Weight: util.ParseFloat64(values[0]),
 		Range: RangeValue{
-			From: ParseFloat64(values[1]),
-			To:   ParseFloat64(values[2]),
+			From: util.ParseFloat64(values[1]),
+			To:   util.ParseFloat64(values[2]),
 		},
 	}
 }

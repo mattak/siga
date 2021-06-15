@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/spf13/cobra"
 )
 
@@ -23,6 +23,6 @@ func init() {
 }
 
 func runCommandCount(cmd *cobra.Command, args []string) {
-	df := pkg.ReadDataFrameByStdinTsv()
+	df := dataframe.ReadDataFrameByStdinTsv()
 	fmt.Println(len(df.Labels))
 }

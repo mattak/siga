@@ -1,4 +1,4 @@
-package pkg
+package dataframe
 
 func (df *DataFrame) FindHeaderIndex(name string) int {
 	for i, v := range df.Headers {

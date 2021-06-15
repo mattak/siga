@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"math"
 	"testing"
 )
 
 func TestVectorSigmaAnomalies(t *testing.T) {
 	t.Run("1 seq", func(t *testing.T) {
-		data := pkg.Vector{1, 2, 3}
+		data := dataframe.Vector{1, 2, 3}
 		data.Reverse()
 		result := data.SigmaAnomalies(1)
 		result.Reverse()
@@ -28,7 +28,7 @@ func TestVectorSigmaAnomalies(t *testing.T) {
 	})
 
 	t.Run("2 seq", func(t *testing.T){
-		data := pkg.Vector{1, 2, 3}
+		data := dataframe.Vector{1, 2, 3}
 		data.Reverse()
 		result := data.SigmaAnomalies(2)
 		result.Reverse()

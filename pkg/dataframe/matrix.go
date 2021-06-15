@@ -1,3 +1,3 @@
-package pkg
+package dataframe
 
 type Matrix []Vector

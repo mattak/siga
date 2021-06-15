@@ -1,6 +1,8 @@
-package pkg
+package dataframe
 
-import "math"
+import (
+	"math"
+)
 
 func (data Matrix) InnerProduct() Vector {
 	vector := CreateVector(len(data[0]))

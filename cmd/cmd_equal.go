@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/spf13/cobra"
 	"log"
 	"strings"
@@ -32,7 +32,7 @@ func runCommandEqual(cmd *cobra.Command, args []string) {
 		log.Fatal("Two COLUMN_NAME or NUMBER should be declared")
 	}
 
-	df := pkg.ReadDataFrameByStdinTsv()
+	df := dataframe.ReadDataFrameByStdinTsv()
 	matrix := df.ExtractMatrixByColumnNameOrValue(args)
 
 	vector := matrix.Equal()

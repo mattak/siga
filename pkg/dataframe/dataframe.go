@@ -1,4 +1,4 @@
-package pkg
+package dataframe
 
 type DataFrame struct {
 	Headers []string    `json:"headers"`

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"testing"
 )
 
 func TestNormalize(t *testing.T) {
 	t.Run("same", func(t *testing.T) {
-		data := pkg.Vector{1, 2, 3}
+		data := dataframe.Vector{1, 2, 3}
 		normalize := data.NormalizeByStart()
 		ExpectInt(t, "len", len(normalize), 3)
 		ExpectValue(t, "normalize[0]", normalize[0], 1)
@@ -15,12 +15,12 @@ func TestNormalize(t *testing.T) {
 		ExpectValue(t, "normalize[2]", normalize[2], 3)
 	})
 	t.Run("empty", func(t *testing.T) {
-		data := pkg.Vector{}
+		data := dataframe.Vector{}
 		normalize := data.NormalizeByStart()
 		ExpectInt(t, "len", len(normalize), 0)
 	})
 	t.Run("half", func(t *testing.T) {
-		data := pkg.Vector{4, 2, 1}
+		data := dataframe.Vector{4, 2, 1}
 		normalize := data.NormalizeByStart()
 		ExpectInt(t, "len", len(normalize), 3)
 		ExpectValue(t, "normalize[0]", normalize[0], 1)

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"log"
 	"testing"
 )
 
 func TestMatrixInnerProduct(t *testing.T) {
-	matrix := pkg.Matrix{{1,2,3}, {10, 10, 10}}
+	matrix := dataframe.Matrix{{1,2,3}, {10, 10, 10}}
 	product := matrix.InnerProduct()
 	if len(product) != 3 {
 		log.Fatal("matrix product length is not expected")

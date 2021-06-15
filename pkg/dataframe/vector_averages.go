@@ -1,4 +1,4 @@
-package pkg
+package dataframe
 
 func (data Vector) SimpleMovingAverage(span int) Vector {
 	result := CreateVector(len(data))

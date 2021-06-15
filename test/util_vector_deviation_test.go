@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"log"
 	"math"
 	"testing"
 )
 
 func TestVectorDeviation(t *testing.T) {
-	data := pkg.Vector{1,2,3}
+	data := dataframe.Vector{1,2,3}
 
 	// mean = 2, diff = [-1, 0, 1], deviation = 2 / 3
 	d1 := data.Deviation(0, 3)
@@ -18,7 +18,7 @@ func TestVectorDeviation(t *testing.T) {
 }
 
 func TestVectorDeviations(t *testing.T) {
-	data := pkg.Vector{1,2,3}
+	data := dataframe.Vector{1,2,3}
 
 	// mean = 2, diff = [-1, 0, 1], deviation = 2 / 3
 	deviations := data.Deviations(2)

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/mattak/siga/pkg"
+	"github.com/mattak/siga/pkg/dataframe"
 	"math"
 	"testing"
 )
 
 func TestVectorShift(t *testing.T) {
-	data := pkg.Vector{1,2,3}
+	data := dataframe.Vector{1,2,3}
 	r1 := data.Shift(0)
 	if r1[0] != data[0] || r1[1] != data[1] || r1[2] != data[2] {
 		t.Fatal("r1 shift value is wrong")

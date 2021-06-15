@@ -1,6 +1,8 @@
-package pkg
+package dataframe
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func CreateDataFrame(headers []string, data []Vector) DataFrame {
 	df := DataFrame{}

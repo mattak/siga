@@ -3,9 +3,8 @@ package cmd
 import (
 	"fmt"
 	"github.com/mattak/siga/pkg/dataframe"
-	"github.com/mattak/siga/pkg/util"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var (
@@ -36,20 +35,8 @@ func init() {
 }
 
 func runCommandDetectAny(cmd *cobra.Command, args []string) {
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateDetectAnyCommandOption()
 	df := dataframe.ReadDataFrameByStdinTsv()
-	if len(args) < 1 {
-		log.Fatal("COLUMN_NAME must be declared")
-	}
-	columnName := args[0]
-	detectValue := 1.0
-	if len(args) >= 2 {
-		detectValue = util.ParseFloat64(args[1])
-	}
-
-	vector, err := df.ExtractColumn(columnName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	result := vector.HasAnyValue(detectValue)
+	result := creator.CreatePipeBool(df).Execute()
 	fmt.Println(result)
 }

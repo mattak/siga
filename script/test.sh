@@ -75,6 +75,14 @@ run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/reverse_123.tsv siga reverse
 # take
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/take_1.tsv siga take 1
 
+# detect_any
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_true.tsv siga detect_any value 1
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_false.tsv siga detect_any value 0
+
+# detect_all
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_false.tsv siga detect_all value 1
+run_test $INPUT_DIR/multi_111.tsv $EXPECT_DIR/expect_bare_true.tsv siga detect_all value 1
+
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 

@@ -72,6 +72,9 @@ run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_nand_123.tsv siga filter n
 # reverse
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/reverse_123.tsv siga reverse
 
+# take
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/take_1.tsv siga take 1
+
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 

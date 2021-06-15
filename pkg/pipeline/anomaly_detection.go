@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-type AnomalyCommandInput struct {
+type AnomalyCommandPipe struct {
 	DataFrame *dataframe.DataFrame
 	Option    AnomalyCommandOption
 }
@@ -38,13 +38,13 @@ func (c CobraCommandInput) CreateAnomalyCommandOption(option OutputOption) Anoma
 }
 
 func (option AnomalyCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return AnomalyCommandInput{
+	return AnomalyCommandPipe{
 		Option:    option,
 		DataFrame: df,
 	}
 }
 
-func (input AnomalyCommandInput) Execute() *dataframe.DataFrame {
+func (input AnomalyCommandPipe) Execute() *dataframe.DataFrame {
 	columnName := input.Option.ColumnName
 	span := input.Option.Span
 	outputColumnName := input.Option.ColumnName

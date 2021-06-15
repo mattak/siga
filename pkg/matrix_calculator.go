@@ -1,10 +1,6 @@
 package pkg
 
-import (
-	"math"
-)
-
-type Matrix []Vector
+import "math"
 
 func (data Matrix) InnerProduct() Vector {
 	vector := CreateVector(len(data[0]))

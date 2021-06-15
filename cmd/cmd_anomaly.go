@@ -1,11 +1,8 @@
 package cmd
 
 import (
-	"fmt"
-	"github.com/mattak/siga/pkg/dataframe"
-	"github.com/mattak/siga/pkg/util"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var (
@@ -28,30 +25,9 @@ func init() {
 }
 
 func runCommandAnomaly(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
-		log.Fatal("COLUMN_NAME, SPAN should be declared")
-	}
-
-	columnName := args[0]
-	span := util.ParseInt(args[1])
-	df := dataframe.ReadDataFrameByStdinTsv()
-
-	vector, err := df.ExtractColumn(columnName)
-	if err != nil {
-		log.Fatalf("Not found index of header name: %s\n", columnName)
-	}
-	vector.Reverse()
-
-	result := vector.SigmaAnomalies(span)
-	result.Reverse()
-
-	if label == "" {
-		label = fmt.Sprintf("%s_anomaly", columnName)
-	}
-	err = df.AddColumn(label, result)
-	if err != nil {
-		log.Fatalf("add result column failed\n")
-	}
-
+	cobraInput := pipeline.CobraCommandInput{cmd, args}
+	option := pipeline.AnomalyCommandOption{ColumnName: label}
+	input := cobraInput.CreateAnomalyCommandInput(option)
+	df := input.Execute()
 	df.PrintTsv(IsPreciseOutput)
 }

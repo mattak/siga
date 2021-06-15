@@ -8,19 +8,14 @@ import (
 	"strings"
 )
 
-func ReadDataFrameByStdinTsv() *DataFrame {
+func ReadDataFrame(bytes []byte) *DataFrame {
 	df := &DataFrame{}
-
-	bytes, err := ioutil.ReadAll(os.Stdin)
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	text := string(bytes)
 	text = strings.TrimRight(text, "\n")
 	lines := strings.Split(text, "\n")
+
 	if len(lines) < 1 {
-		log.Fatal(err)
+		log.Fatal("dataframe lines are empty")
 	}
 
 	df.Headers = strings.Split(lines[0], "\t")
@@ -40,4 +35,21 @@ func ReadDataFrameByStdinTsv() *DataFrame {
 		}
 	}
 	return df
+}
+
+func ReadDataFrameByStdinTsv() *DataFrame {
+	bytes, err := ioutil.ReadAll(os.Stdin)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return ReadDataFrame(bytes)
+}
+
+func ReadDataFrameByFile(filename string) *DataFrame {
+	bytes, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return ReadDataFrame(bytes)
 }

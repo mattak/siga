@@ -1,10 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/mattak/siga/pkg/dataframe"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var (
@@ -26,21 +25,9 @@ func init() {
 }
 
 func runCommandLessEqual(cmd *cobra.Command, args []string) {
-	if len(args) != 2 {
-		log.Fatal("Two COLUMN_NAME or NUMBER should be declared")
-	}
-
+	outputOption := pipeline.OutputOption{ColumnName: label}
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateLessEqualCommandOption(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	matrix := df.ExtractMatrixByColumnNameOrValue(args)
-
-	vector := matrix.LessEqual()
-	if label == "" {
-		label = fmt.Sprintf("le_%s_%s", args[0], args[1])
-	}
-	err := df.AddColumn(label, vector)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	df = creator.CreatePipe(df).Execute()
 	df.PrintTsv(IsPreciseOutput)
 }

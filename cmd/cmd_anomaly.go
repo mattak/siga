@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/mattak/siga/pkg/dataframe"
 	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
 )
@@ -26,8 +27,11 @@ func init() {
 
 func runCommandAnomaly(cmd *cobra.Command, args []string) {
 	cobraInput := pipeline.CobraCommandInput{cmd, args}
-	option := pipeline.AnomalyCommandOption{ColumnName: label}
-	input := cobraInput.CreateAnomalyCommandInput(option)
-	df := input.Execute()
+	outputOption := pipeline.OutputOption{ColumnName: label}
+	inputOption := cobraInput.CreateAnomalyCommandOption(outputOption)
+
+	df := dataframe.ReadDataFrameByStdinTsv()
+	input := inputOption.CreatePipe(df)
+	df = input.Execute()
 	df.PrintTsv(IsPreciseOutput)
 }

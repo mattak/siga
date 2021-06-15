@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/mattak/siga/pkg/dataframe"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
 )
 
@@ -23,7 +24,8 @@ func init() {
 }
 
 func runCommandReverse(cmd *cobra.Command, args []string) {
+	creator := pipeline.ReverseCommandOption{}
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df.Reverse()
+	df = creator.CreatePipe(df).Execute()
 	df.PrintTsv(IsPreciseOutput)
 }

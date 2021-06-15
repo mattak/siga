@@ -8,38 +8,47 @@ import (
 )
 
 type AnomalyCommandInput struct {
-	ColumnName string
-	Span       int
-	DataFrame  dataframe.DataFrame
-	Option     AnomalyCommandOption
+	DataFrame *dataframe.DataFrame
+	Option    AnomalyCommandOption
 }
 
 type AnomalyCommandOption struct {
 	ColumnName string
+	Span       int
+	Output     OutputOption
 }
 
-func (c CobraCommandInput) CreateAnomalyCommandInput(option AnomalyCommandOption) AnomalyCommandInput {
+type OutputOption struct {
+	ColumnName string
+}
+
+func (c CobraCommandInput) CreateAnomalyCommandOption(option OutputOption) AnomalyCommandOption {
 	if len(c.Args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
 
 	columnName := c.Args[0]
 	span := util.ParseInt(c.Args[1])
-	df := dataframe.ReadDataFrameByStdinTsv()
 
-	return AnomalyCommandInput{
+	return AnomalyCommandOption{
 		ColumnName: columnName,
 		Span:       span,
-		DataFrame:  *df,
-		Option:     option,
+		Output:     option,
+	}
+}
+
+func (option AnomalyCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
+	return AnomalyCommandInput{
+		Option:    option,
+		DataFrame: df,
 	}
 }
 
 func (input AnomalyCommandInput) Execute() *dataframe.DataFrame {
-	columnName := input.ColumnName
-	span := input.Span
-	df := input.DataFrame
+	columnName := input.Option.ColumnName
+	span := input.Option.Span
 	outputColumnName := input.Option.ColumnName
+	df := input.DataFrame
 
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {
@@ -59,5 +68,5 @@ func (input AnomalyCommandInput) Execute() *dataframe.DataFrame {
 		log.Fatalf("add result column failed\n")
 	}
 
-	return &df
+	return df
 }

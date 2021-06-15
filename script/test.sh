@@ -69,6 +69,9 @@ run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_nor_123.tsv siga filter no
 run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_and_123.tsv siga filter and 1 value1 value2
 run_test $INPUT_DIR/filter_123.tsv $EXPECT_DIR/filter_nand_123.tsv siga filter nand 1 value1 value2
 
+# reverse
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/reverse_123.tsv siga reverse
+
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 

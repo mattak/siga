@@ -6,14 +6,6 @@ type Pipe interface {
 	Execute() *dataframe.DataFrame
 }
 
-type PipeBool interface {
-	Execute() bool
-}
-
-type PipeInt interface {
-	Execute() int
-}
-
 type PipeCreator interface {
 	CreatePipe(df *dataframe.DataFrame) Pipe
 }

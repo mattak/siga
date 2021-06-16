@@ -1,11 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/mattak/siga/pkg/dataframe"
-	"github.com/mattak/siga/pkg/util"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var (
@@ -17,44 +15,22 @@ var (
 		Long:  "Deviation",
 		Example: `
 deviation by span 5
-  siga dv close 5 < sample.tsv
+  siga dev close 5 < sample.tsv
 deviation by span 5, 10
-  siga dv close 5 10 < sample.tsv
+  siga dev close 5 10 < sample.tsv
 `,
 		Run: runCommandDeviations,
 	}
 )
 
 func init() {
+	DeviationsCmd.Flags().StringVarP(&label, "label", "l", "", "overwrite label name")
 }
 
 func runCommandDeviations(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
-		log.Fatal("COLUMN_NAME, SPAN should be declared")
-	}
-
-	columnName := args[0]
-
+	outputOption := pipeline.OutputOption{ColumnName: label}
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateDeviationsCommandOption(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	vector, err := df.ExtractColumn(columnName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	vector.Reverse()
-
-	for i := 1; i < len(args); i++ {
-		span := util.ParseInt(args[i])
-		if span <= 0 {
-			log.Fatalf("SPAN should be more than 1: %d\n", span)
-		}
-
-		line := vector.Deviations(span)
-		line.Reverse()
-		err = df.AddColumn(fmt.Sprintf("deviation_%s_%d", columnName, span), line)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-
+	df = creator.CreatePipe(df).Execute()
 	df.PrintTsv(IsPreciseOutput)
 }

@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/mattak/siga/pkg/dataframe"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
 )
 
@@ -23,6 +24,8 @@ func init() {
 }
 
 func runCommandCount(cmd *cobra.Command, args []string) {
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateCountCommandOption()
 	df := dataframe.ReadDataFrameByStdinTsv()
-	fmt.Println(len(df.Labels))
+	value := creator.CreatePipeInt(df).Execute()
+	fmt.Println(value)
 }

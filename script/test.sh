@@ -86,9 +86,6 @@ run_test $INPUT_DIR/multi_111.tsv $EXPECT_DIR/expect_bare_true.tsv siga detect_a
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 
-# sum
-run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sum_123.tsv siga sum value 3
-
 # sma
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sma_123.tsv siga sma value 3
 
@@ -117,6 +114,16 @@ run_test $INPUT_DIR/single_0.tsv $EXPECT_DIR/expect_1_single_0.tsv siga add -l e
 
 # sub
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/expect_0_single_1.tsv siga sub -l expect value 1
+
+# sum
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sum_123.tsv siga sum value 3
+
+# const
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/const_123.tsv siga const -l expect 1
+
+# deviations
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/deviations_123_2.tsv siga dev -l expect value 2
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/deviations_123_3.tsv siga dev -l expect value 3
 
 # profit factor
 run_test $INPUT_DIR/profit_factor_123.tsv $EXPECT_DIR/expect_bare_1.tsv siga pf value

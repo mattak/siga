@@ -38,7 +38,7 @@ func runCommandGenerateConst(cmd *cobra.Command, args []string) {
 	}
 
 	column := dataframe.CreateVectorWithValue(length, value)
-	df, err := dataframe.CreateDataFrame([]string{"index", label}, []dataframe.Vector{column})
+	df, err := dataframe.CreateDataFrame([]string{label}, []dataframe.Vector{column})
 	if err != nil {
 		log.Fatalf("DataFrame creation failed: %v\n", err)
 	}

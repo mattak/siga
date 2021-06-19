@@ -47,7 +47,7 @@ func (option AnomalyCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
 func (input AnomalyCommandPipe) Execute() *dataframe.DataFrame {
 	columnName := input.Option.ColumnName
 	span := input.Option.Span
-	outputColumnName := input.Option.ColumnName
+	outputColumnName := input.Option.Output.ColumnName
 	df := input.DataFrame
 
 	vector, err := df.ExtractColumn(columnName)

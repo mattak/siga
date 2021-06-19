@@ -140,4 +140,13 @@ run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/dollar_cost_average_123.tsv siga d
 # normalize
 run_test $INPUT_DIR/multi_421.tsv $EXPECT_DIR/normalize_421.tsv siga normal value
 
+# gen const
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/gen_const_111.tsv siga gen const -l expect 3 1
+
+# gen rand
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/gen_const_111.tsv siga gen rand -l expect 3 1 1
+
+# gen rwalk
+run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/gen_const_111.tsv siga gen rwalk -l expect 3 1 1:0:0
+
 teardown

@@ -40,6 +40,9 @@ func runCommandGenerateRandom(cmd *cobra.Command, args []string) {
 	}
 
 	column := dataframe.CreateVectorWithRandom(length, fromValue, toValue)
-	df := dataframe.CreateDataFrame([]string{"index", label}, []dataframe.Vector{column})
+	df, err := dataframe.CreateDataFrame([]string{"index", label}, []dataframe.Vector{column})
+	if err != nil {
+		log.Fatalf("DataFrame creation failed: %v\n", err)
+	}
 	df.PrintTsv(IsPreciseOutput)
 }

@@ -13,6 +13,12 @@ func ExpectInt(t *testing.T, name string, real int, expect int) {
 	}
 }
 
+func ExpectString(t *testing.T, name string, real string, expect string) {
+	if real != expect {
+		t.Fatalf("%s is not matched: %s <=> %s", name, real, expect)
+	}
+}
+
 func ExpectValue(t *testing.T, name string, real float64, expect float64) {
 	if math.IsNaN(expect) && math.IsNaN(real) || math.Abs(real-expect) <= 1e-9 {
 		return

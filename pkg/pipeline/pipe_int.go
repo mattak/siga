@@ -7,11 +7,11 @@ type PipeInt interface {
 }
 
 type PipelineInt struct {
-	Pipes Pipeline
-	Tail  PipeInt
+	Pipe Pipe
+	Tail PipeInt
 }
 
 func (line PipelineInt) Execute(frame *dataframe.DataFrame) int {
-	frame = line.Pipes.Execute(frame)
+	frame = line.Pipe.Execute(frame)
 	return line.Tail.Execute(frame)
 }

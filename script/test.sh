@@ -92,6 +92,9 @@ run_test $INPUT_DIR/multi_111.tsv $EXPECT_DIR/expect_bare_true.tsv siga detect_a
 # count
 run_test $INPUT_DIR/single_1.tsv $EXPECT_DIR/count_1.tsv siga count
 
+# select_last_value
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_3.tsv siga select_last_value value
+
 # sma
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/sma_123.tsv siga sma value 3
 

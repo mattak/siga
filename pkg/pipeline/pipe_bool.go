@@ -7,11 +7,11 @@ type PipeBool interface {
 }
 
 type PipelineBool struct {
-	Pipes Pipeline
-	Tail  PipeBool
+	Pipe Pipe
+	Tail PipeBool
 }
 
 func (line PipelineBool) Execute(frame *dataframe.DataFrame) bool {
-	frame = line.Pipes.Execute(frame)
+	frame = line.Pipe.Execute(frame)
 	return line.Tail.Execute(frame)
 }

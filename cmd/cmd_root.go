@@ -40,6 +40,7 @@ func init() {
 	RootCmd.AddCommand(ReverseCmd)
 	RootCmd.AddCommand(InvertCmd)
 	RootCmd.AddCommand(TakeCmd)
+	RootCmd.AddCommand(ReverseTakeCmd)
 	RootCmd.AddCommand(ConstCmd)
 	RootCmd.AddCommand(ShiftCmd)
 	RootCmd.AddCommand(FilterCmd)

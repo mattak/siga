@@ -92,3 +92,35 @@ func TestCreateDataFrameWithLabels(t *testing.T) {
 		}
 	})
 }
+
+func TestClone(t *testing.T) {
+	t.Run("empty", func(t *testing.T) {
+		df := dataframe.DataFrame{
+			[]string{},
+			[]string{},
+			[][]float64{},
+		}
+		df2 := df.Clone()
+		ExpectInt(t, "labels length", len(df2.Labels), 0)
+		ExpectInt(t, "headers length", len(df2.Headers), 0)
+		ExpectInt(t, "data length", len(df2.Data), 0)
+	})
+	t.Run("clone", func(t *testing.T) {
+		df := dataframe.DataFrame{
+			[]string{"index", "value"},
+			[]string{"1", "2"},
+			[][]float64{
+				[]float64{10},
+				[]float64{20},
+			},
+		}
+		df2 := df.Clone()
+		ExpectInt(t, "labels length", len(df2.Labels), 2)
+		ExpectInt(t, "headers length", len(df2.Headers), 2)
+		ExpectInt(t, "data length", len(df2.Data), 2)
+		ExpectInt(t, "data[0] length", len(df2.Data[0]), 1)
+		ExpectInt(t, "data[1] length", len(df2.Data[1]), 1)
+		ExpectValue(t, "data[0][0]", df2.Data[0][0], 10.0)
+		ExpectValue(t, "data[1][0]", df2.Data[1][0], 20.0)
+	})
+}

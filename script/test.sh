@@ -78,6 +78,9 @@ run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/take_1.tsv siga take 1
 # reverse_take
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/retake_3.tsv siga retake 1
 
+# shift
+run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/shift_1.tsv siga shift -l expect value 1
+
 # detect_any
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_true.tsv siga detect_any value 1
 run_test $INPUT_DIR/multi_123.tsv $EXPECT_DIR/expect_bare_false.tsv siga detect_any value 0

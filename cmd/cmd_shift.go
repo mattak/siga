@@ -1,11 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/mattak/siga/pkg/dataframe"
-	"github.com/mattak/siga/pkg/util"
+	"github.com/mattak/siga/pkg/pipeline"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var (
@@ -28,27 +26,9 @@ func init() {
 }
 
 func runCommandShift(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
-		log.Fatal("More than two COLUMN_NAME or NUMBER should be declared")
-	}
-
+	outputOption := pipeline.OutputOption{ColumnName: label}
+	pipe := pipeline.CobraCommandInput{cmd, args}.CreateShiftPipe(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	columnName := args[0]
-	offset := util.ParseInt(args[1])
-
-	vector, err := df.ExtractColumn(columnName)
-	if err != nil {
-		log.Fatal(err)
-	}
-	vector = vector.Shift(offset)
-
-	if label == "" {
-		label = fmt.Sprintf("shift_%s_%d", columnName, offset)
-	}
-	err = df.AddColumn(label, vector)
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	df = pipe.Execute(df)
 	df.PrintTsv(IsPreciseOutput)
 }

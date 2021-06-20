@@ -1,0 +1,4 @@
+sequence	value	expect
+s1	1.000	NaN
+s2	2.000	1.000
+s3	3.000	2.000

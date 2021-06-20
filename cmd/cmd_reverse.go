@@ -24,8 +24,8 @@ func init() {
 }
 
 func runCommandReverse(cmd *cobra.Command, args []string) {
-	creator := pipeline.ReverseCommandOption{}
+	creator := pipeline.ReversePipe{}
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df = creator.CreatePipe(df).Execute()
+	df = creator.Execute(df)
 	df.PrintTsv(IsPreciseOutput)
 }

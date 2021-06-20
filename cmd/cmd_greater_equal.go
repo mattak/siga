@@ -26,8 +26,8 @@ func init() {
 
 func runCommandGreaterEqual(cmd *cobra.Command, args []string) {
 	outputOption := pipeline.OutputOption{ColumnName: label}
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateGreaterEqualCommandOption(outputOption)
+	pipe := pipeline.CobraCommandInput{cmd, args}.CreateGreaterEqualPipe(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df = creator.CreatePipe(df).Execute()
+	df = pipe.Execute(df)
 	df.PrintTsv(IsPreciseOutput)
 }

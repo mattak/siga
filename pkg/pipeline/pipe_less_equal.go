@@ -7,44 +7,31 @@ import (
 	"strings"
 )
 
-type LessEqualCommandOption struct {
+type LessEqualPipe struct {
 	ColumnNameOrValues []string
 	Output             OutputOption
 }
 
-type LessEqualCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    LessEqualCommandOption
-}
-
-func (c CobraCommandInput) CreateLessEqualCommandOption(option OutputOption) LessEqualCommandOption {
+func (c CobraCommandInput) CreateLessEqualPipe(option OutputOption) LessEqualPipe {
 	if len(c.Args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
 
 	columnNameOrValues := c.Args
 
-	return LessEqualCommandOption{
+	return LessEqualPipe{
 		ColumnNameOrValues: columnNameOrValues,
 		Output:             option,
 	}
 }
 
-func (option LessEqualCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return LessEqualCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe LessEqualCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
-	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.Option.ColumnNameOrValues)
-	label := pipe.Option.Output.ColumnName
+func (pipe LessEqualPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.ColumnNameOrValues)
+	label := pipe.Output.ColumnName
 
 	vector := matrix.LessEqual()
 	if label == "" {
-		label = fmt.Sprintf("le_%s", strings.Join(pipe.Option.ColumnNameOrValues, "_"))
+		label = fmt.Sprintf("le_%s", strings.Join(pipe.ColumnNameOrValues, "_"))
 	}
 	err := df.AddColumn(label, vector)
 	if err != nil {

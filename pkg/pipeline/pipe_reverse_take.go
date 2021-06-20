@@ -6,37 +6,25 @@ import (
 	"log"
 )
 
-type ReverseTakeCommandOption struct {
+type ReverseTakePipe struct {
 	Size int
 }
 
-type ReverseTakeCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    ReverseTakeCommandOption
-}
-
-func (c CobraCommandInput) CreateReverseTakeCommandOption(option OutputOption) ReverseTakeCommandOption {
+func (c CobraCommandInput) CreateReverseTakePipe(option OutputOption) ReverseTakePipe {
 	if len(c.Args) < 1 {
 		log.Fatal("SIZE should be declared")
 	}
 
 	size := util.ParseInt(c.Args[0])
 
-	return ReverseTakeCommandOption{
+	return ReverseTakePipe{
 		Size: size,
 	}
 }
 
-func (option ReverseTakeCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return ReverseTakeCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe ReverseTakeCommandPipe) Execute() *dataframe.DataFrame {
-	pipe.DataFrame.Reverse()
-	pipe.DataFrame.Take(pipe.Option.Size)
-	pipe.DataFrame.Reverse()
-	return pipe.DataFrame
+func (pipe ReverseTakePipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	df.Reverse()
+	df.Take(pipe.Size)
+	df.Reverse()
+	return df
 }

@@ -7,44 +7,31 @@ import (
 	"strings"
 )
 
-type AddCommandOption struct {
+type AddPipe struct {
 	ColumnNameOrValues []string
 	Output             OutputOption
 }
 
-type AddCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    AddCommandOption
-}
-
-func (c CobraCommandInput) CreateAddCommandOption(option OutputOption) AddCommandOption {
+func (c CobraCommandInput) CreateAddPipe(option OutputOption) AddPipe {
 	if len(c.Args) < 1 {
 		log.Fatal("More than 1 COLUMN_NAME should be declared")
 	}
 
 	columnNameOrValues := c.Args
 
-	return AddCommandOption{
+	return AddPipe{
 		ColumnNameOrValues: columnNameOrValues,
 		Output:             option,
 	}
 }
 
-func (option AddCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return AddCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe AddCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
-	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.Option.ColumnNameOrValues)
+func (pipe AddPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.ColumnNameOrValues)
 	vector := matrix.Add()
-	label := pipe.Option.Output.ColumnName
+	label := pipe.Output.ColumnName
 
 	if label == "" {
-		label = fmt.Sprintf("add_%s", strings.Join(pipe.Option.ColumnNameOrValues, "_"))
+		label = fmt.Sprintf("add_%s", strings.Join(pipe.ColumnNameOrValues, "_"))
 	}
 
 	err := df.AddColumn(label, vector)

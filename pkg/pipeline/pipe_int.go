@@ -3,19 +3,15 @@ package pipeline
 import "github.com/mattak/siga/pkg/dataframe"
 
 type PipeInt interface {
-	Execute() int
-}
-
-type PipeIntCreator interface {
-	CreatePipeInt(df *dataframe.DataFrame) PipeInt
+	Execute(df *dataframe.DataFrame) int
 }
 
 type PipelineInt struct {
-	Pipes   Pipeline
-	Creator PipeIntCreator
+	Pipes Pipeline
+	Tail  PipeInt
 }
 
 func (line PipelineInt) Execute(frame *dataframe.DataFrame) int {
-	frame = line.Pipes.ExecutePipes(frame)
-	return line.Creator.CreatePipeInt(frame).Execute()
+	frame = line.Pipes.Execute(frame)
+	return line.Tail.Execute(frame)
 }

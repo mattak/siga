@@ -6,25 +6,14 @@ import (
 	"os"
 )
 
-type LogCommandOption struct {
-}
-
 type LogCommandPipe struct {
-	DataFrame *dataframe.DataFrame
 }
 
-func (c CobraCommandInput) CreateLogCommandOption(option OutputOption) LogCommandOption {
-	return LogCommandOption{}
+func (c CobraCommandInput) CreateLogCommandPipe(option OutputOption) LogCommandPipe {
+	return LogCommandPipe{}
 }
 
-func (option LogCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return LogCommandPipe{
-		DataFrame: df,
-	}
-}
-
-func (pipe LogCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
+func (optoin LogCommandPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
 	_, _ = fmt.Fprintln(os.Stderr, df.ToTsvString(false))
 	return df
 }

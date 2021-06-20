@@ -24,8 +24,8 @@ func init() {
 }
 
 func runCommandCount(cmd *cobra.Command, args []string) {
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateCountCommandOption()
+	pipe := pipeline.CobraCommandInput{cmd, args}.CreateCountPipeInt()
 	df := dataframe.ReadDataFrameByStdinTsv()
-	value := creator.CreatePipeInt(df).Execute()
+	value := pipe.Execute(df)
 	fmt.Println(value)
 }

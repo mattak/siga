@@ -7,22 +7,13 @@ import (
 	"log"
 )
 
-type AnomalyCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    AnomalyCommandOption
-}
-
-type AnomalyCommandOption struct {
+type AnomalyPipe struct {
 	ColumnName string
 	Span       int
 	Output     OutputOption
 }
 
-type OutputOption struct {
-	ColumnName string
-}
-
-func (c CobraCommandInput) CreateAnomalyCommandOption(option OutputOption) AnomalyCommandOption {
+func (c CobraCommandInput) CreateAnomalyPipe(option OutputOption) AnomalyPipe {
 	if len(c.Args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
@@ -30,25 +21,17 @@ func (c CobraCommandInput) CreateAnomalyCommandOption(option OutputOption) Anoma
 	columnName := c.Args[0]
 	span := util.ParseInt(c.Args[1])
 
-	return AnomalyCommandOption{
+	return AnomalyPipe{
 		ColumnName: columnName,
 		Span:       span,
 		Output:     option,
 	}
 }
 
-func (option AnomalyCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return AnomalyCommandPipe{
-		Option:    option,
-		DataFrame: df,
-	}
-}
-
-func (input AnomalyCommandPipe) Execute() *dataframe.DataFrame {
-	columnName := input.Option.ColumnName
-	span := input.Option.Span
-	outputColumnName := input.Option.Output.ColumnName
-	df := input.DataFrame
+func (pipe AnomalyPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	columnName := pipe.ColumnName
+	span := pipe.Span
+	outputColumnName := pipe.Output.ColumnName
 
 	vector, err := df.ExtractColumn(columnName)
 	if err != nil {

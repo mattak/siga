@@ -7,18 +7,13 @@ import (
 	"log"
 )
 
-type DeviationsCommandOption struct {
+type DeviationsPipe struct {
 	ColumnName string
 	Spans      []int
 	Output     OutputOption
 }
 
-type DeviationsCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    DeviationsCommandOption
-}
-
-func (c CobraCommandInput) CreateDeviationsCommandOption(option OutputOption) DeviationsCommandOption {
+func (c CobraCommandInput) CreateDeviationsPipe(option OutputOption) DeviationsPipe {
 	if len(c.Args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
@@ -29,30 +24,22 @@ func (c CobraCommandInput) CreateDeviationsCommandOption(option OutputOption) De
 		spans[i] = util.ParseInt(c.Args[i+1])
 	}
 
-	return DeviationsCommandOption{
+	return DeviationsPipe{
 		ColumnName: columnName,
 		Spans:      spans,
 		Output:     option,
 	}
 }
 
-func (option DeviationsCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return DeviationsCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe DeviationsCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
-	vector, err := df.ExtractColumn(pipe.Option.ColumnName)
+func (pipe DeviationsPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	vector, err := df.ExtractColumn(pipe.ColumnName)
 	if err != nil {
 		log.Fatal(err)
 	}
 	vector.Reverse()
 
-	for i := 0; i < len(pipe.Option.Spans); i++ {
-		span := pipe.Option.Spans[i]
+	for i := 0; i < len(pipe.Spans); i++ {
+		span := pipe.Spans[i]
 		if span <= 0 {
 			log.Fatalf("SPAN should be more than 1: %d\n", span)
 		}
@@ -60,9 +47,9 @@ func (pipe DeviationsCommandPipe) Execute() *dataframe.DataFrame {
 		line := vector.Deviations(span)
 		line.Reverse()
 
-		label := pipe.Option.Output.ColumnName
+		label := pipe.Output.ColumnName
 		if label == "" {
-			label = fmt.Sprintf("deviation_%s_%d", pipe.Option.ColumnName, span)
+			label = fmt.Sprintf("deviation_%s_%d", pipe.ColumnName, span)
 		}
 
 		err = df.AddColumn(label, line)

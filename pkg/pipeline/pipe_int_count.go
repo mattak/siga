@@ -4,25 +4,13 @@ import (
 	"github.com/mattak/siga/pkg/dataframe"
 )
 
-type CountCommandOption struct {
+type CountPipeInt struct {
 }
 
-type CountCommandPipeOutput struct {
-	DataFrame *dataframe.DataFrame
-	Option    CountCommandOption
+func (c CobraCommandInput) CreateCountPipeInt() CountPipeInt {
+	return CountPipeInt{}
 }
 
-func (c CobraCommandInput) CreateCountCommandOption() CountCommandOption {
-	return CountCommandOption{ }
-}
-
-func (option CountCommandOption) CreatePipeInt(df *dataframe.DataFrame) PipeInt {
-	return CountCommandPipeOutput{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe CountCommandPipeOutput) Execute() int {
-	return len(pipe.DataFrame.Labels)
+func (pipe CountPipeInt) Execute(df *dataframe.DataFrame) int {
+	return len(df.Labels)
 }

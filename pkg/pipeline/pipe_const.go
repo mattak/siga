@@ -7,17 +7,12 @@ import (
 	"log"
 )
 
-type ConstCommandOption struct {
+type ConstPipe struct {
 	Values []float64
 	Output OutputOption
 }
 
-type ConstCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    ConstCommandOption
-}
-
-func (c CobraCommandInput) CreateConstCommandOption(option OutputOption) ConstCommandOption {
+func (c CobraCommandInput) CreateConstPipe(option OutputOption) ConstPipe {
 	if len(c.Args) < 1 {
 		log.Fatal("NUMBER should be declared")
 	}
@@ -27,28 +22,19 @@ func (c CobraCommandInput) CreateConstCommandOption(option OutputOption) ConstCo
 		values[i] = util.ParseFloat64(c.Args[i])
 	}
 
-	return ConstCommandOption{
+	return ConstPipe{
 		Values: values,
 		Output: option,
 	}
 }
 
-func (option ConstCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return ConstCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe ConstCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
-
-	for i := 0; i < len(pipe.Option.Values); i++ {
-		n := pipe.Option.Values[i]
+func (pipe ConstPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	for i := 0; i < len(pipe.Values); i++ {
+		n := pipe.Values[i]
 		vector := dataframe.CreateVector(len(df.Labels))
 		vector.Fill(n)
 
-		label := pipe.Option.Output.ColumnName
+		label := pipe.Output.ColumnName
 		if label == "" {
 			label = fmt.Sprintf("const_%.3f", n)
 		}

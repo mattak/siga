@@ -7,44 +7,31 @@ import (
 	"strings"
 )
 
-type GreaterThanCommandOption struct {
+type GreaterThanPipe struct {
 	ColumnNameOrValues []string
 	Output             OutputOption
 }
 
-type GreaterThanCommandPipe struct {
-	DataFrame *dataframe.DataFrame
-	Option    GreaterThanCommandOption
-}
-
-func (c CobraCommandInput) CreateGreaterThanCommandOption(option OutputOption) GreaterThanCommandOption {
+func (c CobraCommandInput) CreateGreaterThanPipe(option OutputOption) GreaterThanPipe {
 	if len(c.Args) < 2 {
 		log.Fatal("COLUMN_NAME, SPAN should be declared")
 	}
 
 	columnNameOrValues := c.Args
 
-	return GreaterThanCommandOption{
+	return GreaterThanPipe{
 		ColumnNameOrValues: columnNameOrValues,
 		Output:             option,
 	}
 }
 
-func (option GreaterThanCommandOption) CreatePipe(df *dataframe.DataFrame) Pipe {
-	return GreaterThanCommandPipe{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe GreaterThanCommandPipe) Execute() *dataframe.DataFrame {
-	df := pipe.DataFrame
-	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.Option.ColumnNameOrValues)
-	label := pipe.Option.Output.ColumnName
+func (pipe GreaterThanPipe) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
+	matrix := df.ExtractMatrixByColumnNameOrValue(pipe.ColumnNameOrValues)
+	label := pipe.Output.ColumnName
 
 	vector := matrix.GreaterThan()
 	if label == "" {
-		label = fmt.Sprintf("gt_%s", strings.Join(pipe.Option.ColumnNameOrValues, "_"))
+		label = fmt.Sprintf("gt_%s", strings.Join(pipe.ColumnNameOrValues, "_"))
 	}
 	err := df.AddColumn(label, vector)
 	if err != nil {

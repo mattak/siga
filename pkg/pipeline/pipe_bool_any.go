@@ -6,17 +6,12 @@ import (
 	"log"
 )
 
-type DetectAnyCommandOption struct {
+type DetectAnyPipeBool struct {
 	ColumnName  string
 	DetectValue float64
 }
 
-type DetectAnyCommandPipeOutput struct {
-	DataFrame *dataframe.DataFrame
-	Option    DetectAnyCommandOption
-}
-
-func (c CobraCommandInput) CreateDetectAnyCommandOption() DetectAnyCommandOption {
+func (c CobraCommandInput) CreateDetectAnyPipeBool() DetectAnyPipeBool {
 	if len(c.Args) < 1 {
 		log.Fatal("COLUMN_NAME must be declared")
 	}
@@ -25,24 +20,17 @@ func (c CobraCommandInput) CreateDetectAnyCommandOption() DetectAnyCommandOption
 	if len(c.Args) >= 2 {
 		detectValue = util.ParseFloat64(c.Args[1])
 	}
-	return DetectAnyCommandOption{
+	return DetectAnyPipeBool{
 		ColumnName:  columnName,
 		DetectValue: detectValue,
 	}
 }
 
-func (option DetectAnyCommandOption) CreatePipeBool(df *dataframe.DataFrame) PipeBool {
-	return DetectAnyCommandPipeOutput{
-		DataFrame: df,
-		Option:    option,
-	}
-}
-
-func (pipe DetectAnyCommandPipeOutput) Execute() bool {
-	vector, err := pipe.DataFrame.ExtractColumn(pipe.Option.ColumnName)
+func (pipe DetectAnyPipeBool) Execute(df *dataframe.DataFrame) bool {
+	vector, err := df.ExtractColumn(pipe.ColumnName)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := vector.HasAnyValue(pipe.Option.DetectValue)
+	result := vector.HasAnyValue(pipe.DetectValue)
 	return result
 }

@@ -25,9 +25,9 @@ func init() {
 
 func runCommandTake(cmd *cobra.Command, args []string) {
 	outputOption := pipeline.OutputOption{ColumnName: label}
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateTakeCommandOption(outputOption)
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateTakePipe(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df = creator.CreatePipe(df).Execute()
+	df = creator.Execute(df)
 
 	df.PrintTsv(IsPreciseOutput)
 }

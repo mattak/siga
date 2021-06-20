@@ -3,18 +3,18 @@ package pipeline
 import "github.com/mattak/siga/pkg/dataframe"
 
 type Pipe interface {
-	Execute() *dataframe.DataFrame
+	Execute(df *dataframe.DataFrame) *dataframe.DataFrame
 }
 
 type PipeCreator interface {
-	CreatePipe(df *dataframe.DataFrame) Pipe
+	CreatePipe() Pipe
 }
 
-type Pipeline []PipeCreator
+type Pipeline []Pipe
 
-func (creators Pipeline) ExecutePipes(df *dataframe.DataFrame) *dataframe.DataFrame {
+func (creators Pipeline) Execute(df *dataframe.DataFrame) *dataframe.DataFrame {
 	for i := 0; i < len(creators); i++ {
-		df = creators[i].CreatePipe(df).Execute()
+		df = creators[i].Execute(df)
 	}
 	return df
 }

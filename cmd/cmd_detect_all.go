@@ -35,9 +35,8 @@ func init() {
 }
 
 func runCommandDetectAll(cmd *cobra.Command, args []string) {
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateDetectAllCommandOption()
+	pipe := pipeline.CobraCommandInput{cmd, args}.CreateDetectAllPipeBool()
 	df := dataframe.ReadDataFrameByStdinTsv()
-	result := creator.CreatePipeBool(df).Execute()
-
+	result := pipe.Execute(df)
 	fmt.Println(result)
 }

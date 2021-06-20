@@ -25,9 +25,9 @@ func init() {
 
 func runCommandReverseTake(cmd *cobra.Command, args []string) {
 	outputOption := pipeline.OutputOption{ColumnName: label}
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateReverseTakeCommandOption(outputOption)
+	creator := pipeline.CobraCommandInput{cmd, args}.CreateReverseTakePipe(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df = creator.CreatePipe(df).Execute()
+	df = creator.Execute(df)
 
 	df.PrintTsv(IsPreciseOutput)
 }

@@ -28,10 +28,9 @@ func init() {
 func runCommandAnomaly(cmd *cobra.Command, args []string) {
 	cobraInput := pipeline.CobraCommandInput{cmd, args}
 	outputOption := pipeline.OutputOption{ColumnName: label}
-	inputOption := cobraInput.CreateAnomalyCommandOption(outputOption)
+	pipe := cobraInput.CreateAnomalyPipe(outputOption)
 
 	df := dataframe.ReadDataFrameByStdinTsv()
-	input := inputOption.CreatePipe(df)
-	df = input.Execute()
+	df = pipe.Execute(df)
 	df.PrintTsv(IsPreciseOutput)
 }

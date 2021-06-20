@@ -26,8 +26,8 @@ func init() {
 
 func runCommandLessEqual(cmd *cobra.Command, args []string) {
 	outputOption := pipeline.OutputOption{ColumnName: label}
-	creator := pipeline.CobraCommandInput{cmd, args}.CreateLessEqualCommandOption(outputOption)
+	pipe := pipeline.CobraCommandInput{cmd, args}.CreateLessEqualPipe(outputOption)
 	df := dataframe.ReadDataFrameByStdinTsv()
-	df = creator.CreatePipe(df).Execute()
+	df = pipe.Execute(df)
 	df.PrintTsv(IsPreciseOutput)
 }

@@ -2,6 +2,7 @@ package dataframe
 
 import (
 	"errors"
+	"log"
 	"strconv"
 )
 
@@ -54,4 +55,28 @@ func CreateDataFrameWithLabels(headers []string, labels []string, data []Vector)
 	}
 
 	return &df, nil
+}
+
+func (frame *DataFrame) Clone() *DataFrame {
+	headers := make([]string, len(frame.Headers))
+	labels := make([]string, len(frame.Labels))
+	data := make([]Vector, len(frame.Data))
+	for i := 0; i< len(frame.Headers); i++ {
+		headers[i] = frame.Headers[i]
+	}
+	for i := 0; i< len(frame.Labels); i++ {
+		labels[i] = frame.Labels[i]
+	}
+	for i := 0; i< len(frame.Data); i++ {
+		data[i] = make(Vector, len(frame.Data[i]))
+		for j := 0; j < len(frame.Data[i]); j++ {
+			data[i][j] = frame.Data[i][j];
+		}
+	}
+
+	newFrame, err := CreateDataFrameWithLabels(headers, labels, data)
+	if err != nil {
+		log.Fatal("ERROR: Clone DataFrame failed")
+	}
+	return newFrame
 }
